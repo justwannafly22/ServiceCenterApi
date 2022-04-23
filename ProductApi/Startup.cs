@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using ProductApi.Infrastructure.Exceptions;
 using ProductApi.Infrastructure.Extensions;
 using System.Reflection;
@@ -29,6 +30,16 @@ namespace ProductApi
                 s.RegisterValidatorsFromAssemblyContaining<Startup>();
             });
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Replaced Part API",
+                    Description = "Replaced Part API"
+                });
+            });
+
             services.UseHealthCheckLogCall(Configuration);
             services.ConfigureDatabase(Configuration);
             services.ConfigureRepositories();
@@ -38,6 +49,9 @@ namespace ProductApi
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseMiddleware<ExceptionHandler>();
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             if (env.IsDevelopment())
             {
