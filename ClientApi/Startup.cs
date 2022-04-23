@@ -32,8 +32,8 @@ namespace ClientApi
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Replaced Part API",
-                    Description = "Replaced Part API"
+                    Title = "Client API",
+                    Description = "Client API"
                 });
             });
 

@@ -35,8 +35,8 @@ namespace RepairApi
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Replaced Part API",
-                    Description = "Replaced Part API"
+                    Title = "Repair API",
+                    Description = "Repair API"
                 });
             });
 

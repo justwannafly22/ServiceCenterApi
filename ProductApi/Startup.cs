@@ -35,8 +35,8 @@ namespace ProductApi
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Replaced Part API",
-                    Description = "Replaced Part API"
+                    Title = "Product API",
+                    Description = "Rroduct API"
                 });
             });
 
