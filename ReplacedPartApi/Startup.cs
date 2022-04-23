@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using ReplacedPartApi.Infrastructure.Exceptions;
 using ReplacedPartApi.Infrastructure.Extensions;
 using System.Reflection;
@@ -41,6 +42,16 @@ namespace ReplacedPartApi
                 s.RegisterValidatorsFromAssemblyContaining<Startup>();
             });
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Replaced Part API",
+                    Description = "Replaced Part API"
+                });
+            });
+
             services.UseHealthCheckLogCall(Configuration);
             services.ConfigureDatabase(Configuration);
             services.ConfigureRepositories();
@@ -51,6 +62,9 @@ namespace ReplacedPartApi
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseMiddleware<ExceptionHandler>();
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             if (env.IsDevelopment())
             {
