@@ -22,16 +22,6 @@ namespace ProductApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            #region Cors configuring
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy", builder =>
-                builder.AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
-            });
-            #endregion
-
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddControllers().AddFluentValidation(s =>
@@ -55,6 +45,13 @@ namespace ProductApi
             }
 
             app.UseRouting();
+
+            #region Cors configuring
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod());
+            #endregion
 
             app.UseEndpoints(endpoints =>
             {
