@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using RepairApi.Boundary;
 using RepairApi.Boundary.Repair;
 using RepairApi.Boundary.Repair.RequestModels;
-using System;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace RepairApi.Controllers

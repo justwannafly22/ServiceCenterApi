@@ -22,7 +22,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:5010",
-      "launchUrl": "http://localhost:5010/health"
+      "launchUrl": "http://localhost:5010/swagger"
     },
     "Docker": {
       "commandName": "Docker",

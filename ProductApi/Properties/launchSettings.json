@@ -22,7 +22,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:5013",
-      "launchUrl": "http://localhost:5013/health"
+      "launchUrl": "http://localhost:5013/swagger"
     }
   }
 }

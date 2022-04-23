@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using ProductApi.Infrastructure.Exceptions;
 using ProductApi.Infrastructure.Extensions;
 using System.Reflection;
@@ -22,21 +23,21 @@ namespace ProductApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            #region Cors configuring
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy", builder =>
-                builder.AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
-            });
-            #endregion
-
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddControllers().AddFluentValidation(s =>
             {
                 s.RegisterValidatorsFromAssemblyContaining<Startup>();
+            });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Product API",
+                    Description = "Rroduct API"
+                });
             });
 
             services.UseHealthCheckLogCall(Configuration);
@@ -49,12 +50,22 @@ namespace ProductApi
         {
             app.UseMiddleware<ExceptionHandler>();
 
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
             app.UseRouting();
+
+            #region Cors configuring
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod());
+            #endregion
 
             app.UseEndpoints(endpoints =>
             {
