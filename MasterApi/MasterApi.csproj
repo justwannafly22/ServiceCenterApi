@@ -19,12 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Boundary\" />
+    <Folder Include="Boundary\Master\RequestModels\" />
     <Folder Include="Domain\" />
     <Folder Include="Factories\" />
     <Folder Include="Handlers\" />
-    <Folder Include="Infrastructure\" />
-    <Folder Include="Repository\" />
   </ItemGroup>
 
 
