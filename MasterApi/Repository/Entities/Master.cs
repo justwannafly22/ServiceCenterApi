@@ -21,7 +21,7 @@ namespace MasterApi.Repository
         public string Surname { get; set; }
 
         [Column("age")]
-        [Range(0, 150)]
+        [Range(18, 150)]
         [Required]
         public int Age { get; set; }
 
