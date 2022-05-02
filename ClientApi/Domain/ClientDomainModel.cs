@@ -16,6 +16,6 @@ namespace ClientApi.Domain
 
         public string Email { get; set; }
 
-        public bool AllowEmailNotification { get; set; }
+        public Guid MasterId { get; set; }
     }
 }

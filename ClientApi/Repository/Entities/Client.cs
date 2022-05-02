@@ -31,8 +31,8 @@ namespace ClientApi.Repository.Entities
         [Required]
         public string Email { get; set; }
 
-        [Column("allow_email_notifications")]
-        public bool AllowEmailNotification { get; set; }
+        [Column("master_id")]
+        public Guid MasterId { get; set; }
 
         [Column("user_id")]
         public string UserId { get; set; }

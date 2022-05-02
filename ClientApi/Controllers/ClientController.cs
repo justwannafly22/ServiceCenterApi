@@ -66,7 +66,7 @@ namespace ClientApi.Controllers
         /// Create a client
         /// </summary>
         /// <param name="model"></param>
-        /// <response code="201">Success. Status model was created successfully</response>
+        /// <response code="201">Success. Client was created successfully</response>
         /// <response code="400">Bad Request</response>
         /// <response code="500">Internal Server Error</response>
         [ProducesResponseType(typeof(ClientResponseModel), StatusCodes.Status201Created)]

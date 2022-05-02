@@ -25,6 +25,6 @@ namespace ClientApi.Boundary.Client.RequestModels
         [MaxLength(60, ErrorMessage = "Max length for Email is 60 characters.")]
         public string Email { get; set; }
 
-        public bool AllowEmailNotification { get; set; }
+        public Guid MasterId { get; set; }
     }
 }

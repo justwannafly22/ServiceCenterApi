@@ -14,7 +14,6 @@ namespace ClientApi.Boundary.Client
             Age = model.Age;
             ContactNumber = model.ContactNumber;
             Email = model.Email;
-            AllowEmailNotification = model.AllowEmailNotification;
         }
 
         public UpdateClientModel(UpdateClientRequestModel model, Guid id)
@@ -25,7 +24,6 @@ namespace ClientApi.Boundary.Client
             Age = model.Age;
             ContactNumber = model.ContactNumber;
             Email = model.Email;
-            AllowEmailNotification = model.AllowEmailNotification;
         }
 
         public UpdateClientModel() { }
@@ -42,6 +40,6 @@ namespace ClientApi.Boundary.Client
 
         public string Email { get; set; }
 
-        public bool AllowEmailNotification { get; set; }
+        public Guid MasterId { get; set; }
     }
 }
