@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace MasterApi.Controllers
 {
     [ApiController]
-    [Route("api/v1/clients")]
+    [Route("api/v1/masters")]
     [ApiExplorerSettings(GroupName = "v1")]
     public class MasterController : BaseController
     {

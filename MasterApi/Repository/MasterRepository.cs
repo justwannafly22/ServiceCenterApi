@@ -50,6 +50,8 @@ namespace MasterApi.Repository
                               .SingleOrDefaultAsync()
                               .ConfigureAwait(false);
 
+            _context.Remove(entity);
+
             _logger.LogInformation($"The master: {entity} was successfully deleted.");
 
             await _context.SaveChangesAsync().ConfigureAwait(false);

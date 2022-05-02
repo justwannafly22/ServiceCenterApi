@@ -52,6 +52,8 @@ namespace RepairApi.Repository
                               .SingleOrDefaultAsync()
                               .ConfigureAwait(false);
 
+            _context.Remove(entity);
+
             _logger.LogDebug($"The repair: {entity} was successfully deleted.");
 
             await _context.SaveChangesAsync().ConfigureAwait(false);

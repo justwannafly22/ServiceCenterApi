@@ -50,7 +50,8 @@ namespace ClientApi.Repository
 
             var entity = await GetClientByExpression(e => e.Id.Equals(model.Id)).SingleOrDefaultAsync().ConfigureAwait(false);
 
-            _context.Clients.Remove(entity);
+            _context.Remove(entity);
+
             await _context.SaveChangesAsync().ConfigureAwait(false);
 
             _logger.LogInformation($"The client: {entity} was successfully deleted.");

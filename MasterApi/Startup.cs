@@ -35,8 +35,8 @@ namespace MasterApi
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Repair API",
-                    Description = "Repair API"
+                    Title = "Master API",
+                    Description = "Master API"
                 });
             });
 
