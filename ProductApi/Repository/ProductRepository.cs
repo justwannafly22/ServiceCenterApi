@@ -50,7 +50,8 @@ namespace ProductApi.Repository
                               .SingleOrDefaultAsync()
                               .ConfigureAwait(false);
 
-            _context.Set<Product>().Remove(entity);
+            _context.Remove(entity);
+
             await _context.SaveChangesAsync(false);
 
             _logger.LogInformation($"The product with id: {model.Id} was successfully deleted.");

@@ -1,5 +1,4 @@
 ﻿using ClientApi.Boundary.Client.RequestModels;
-using ClientApi.Boundary.Client.ResponseModels;
 using ClientApi.Factories;
 using ClientApi.Repository.Interfaces;
 using MediatR;

@@ -1,7 +1,6 @@
-﻿using ClientApi.Boundary;
-using ClientApi.Boundary.Client;
-using ClientApi.Boundary.Client.RequestModels;
-using ClientApi.Boundary.Client.ResponseModels;
+﻿using MasterApi.Boundary;
+using MasterApi.Boundary.Master;
+using MasterApi.Boundary.Master.RequestModels;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,70 +9,70 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace ClientApi.Controllers
+namespace MasterApi.Controllers
 {
     [ApiController]
-    [Route("api/v1/clients")]
+    [Route("api/v1/masters")]
     [ApiExplorerSettings(GroupName = "v1")]
-    public class ClientController : BaseController
+    public class MasterController : BaseController
     {
         private readonly IMediator _mediator;
 
-        public ClientController(IMediator mediator)
+        public MasterController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
         /// <summary>
-        /// Returns all clients
+        /// Returns all masters
         /// </summary>
-        /// <response code="200">Success. Clients were received successfully</response>
+        /// <response code="200">Success. Masters were received successfully</response>
         /// <response code="500">Internal Server Error</response>
-        [ProducesResponseType(typeof(List<ClientResponseModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<MasterResponseModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status500InternalServerError)]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await _mediator.Send(new GetAllClientsRequestModel()).ConfigureAwait(false));
+            return Ok(await _mediator.Send(new GetAllMastersRequestModel()).ConfigureAwait(false));
         }
 
         /// <summary>
-        /// Returns a client
+        /// Returns a master
         /// </summary>
         /// <param name="id"></param>
-        /// <response code="200">Success. Client model was received successfully</response>
+        /// <response code="200">Success. Master model was received successfully</response>
         /// <response code="400">Bad request</response>
-        /// <response code="404">Client with provided id cannot be found</response>
+        /// <response code="404">Master with provided id cannot be found</response>
         /// <response code="500">Internal Server Error</response>
-        [ProducesResponseType(typeof(ClientResponseModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(MasterResponseModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status500InternalServerError)]
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById([FromRoute] GetClientByIdRequestModel model)
+        public async Task<IActionResult> GetById([FromRoute] GetMasterByIdRequestModel model)
         {
             var client = await _mediator.Send(model).ConfigureAwait(false);
 
             if (client is null)
             {
-                return NotFound(new BaseResponseModel($"Client with id: {model.Id} doesn`t exist in the database.", HttpStatusCode.NotFound));
+                return NotFound(new BaseResponseModel($"Master with id: {model.Id} doesn`t exist in the database.", HttpStatusCode.NotFound));
             }
 
             return Ok(client);
         }
 
         /// <summary>
-        /// Create a client
+        /// Create a master
         /// </summary>
         /// <param name="model"></param>
-        /// <response code="201">Success. Client was created successfully</response>
+        /// <response code="201">Success. Master was created successfully</response>
         /// <response code="400">Bad Request</response>
         /// <response code="500">Internal Server Error</response>
-        [ProducesResponseType(typeof(ClientResponseModel), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(MasterResponseModel), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status500InternalServerError)]
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateClientRequestModel model)
+        public async Task<IActionResult> Create([FromBody] CreateMasterRequestModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -86,44 +85,44 @@ namespace ClientApi.Controllers
         }
 
         /// <summary>
-        /// Update a client
+        /// Update a master
         /// </summary>
         /// <param name="id"></param>
         /// <param name="model"></param>
-        /// <response code="200">Client was updated successfully</response>
+        /// <response code="200">Master was updated successfully</response>
         /// <response code="400">Bad request</response>
-        /// <response code="404">Client with provided id cannot be found</response>
+        /// <response code="404">Master with provided id cannot be found</response>
         /// <response code="500">Internal server error</response>
-        [ProducesResponseType(typeof(ClientResponseModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(MasterResponseModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status500InternalServerError)]
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateClientRequestModel requestModel)
+        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateMasterRequestModel requestModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(new BaseResponseModel(GetErrorMessage(ModelState), HttpStatusCode.BadRequest));
             }
 
-            var model = new UpdateClientModel(requestModel, id);
+            var model = new UpdateMasterModel(requestModel, id);
             _ = await _mediator.Send(model).ConfigureAwait(false);
 
             return NoContent();
         }
 
         /// <summary>
-        /// Delete a client
+        /// Delete a master
         /// </summary>
         /// <param name="id"></param>
-        /// <response code="204">Client was deleted successfully</response>
-        /// <response code="404">Client with provided id cannot be found</response>
+        /// <response code="204">Master was deleted successfully</response>
+        /// <response code="404">Master with provided id cannot be found</response>
         /// <response code="500">Internal server error</response>
         [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status500InternalServerError)]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] DeleteClientRequestModel model)
+        public async Task<IActionResult> Delete([FromRoute] DeleteMasterRequestModel model)
         {
             _ = await _mediator.Send(model).ConfigureAwait(false);
 

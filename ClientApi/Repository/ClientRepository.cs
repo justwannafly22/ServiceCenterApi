@@ -50,7 +50,8 @@ namespace ClientApi.Repository
 
             var entity = await GetClientByExpression(e => e.Id.Equals(model.Id)).SingleOrDefaultAsync().ConfigureAwait(false);
 
-            _context.Clients.Remove(entity);
+            _context.Remove(entity);
+
             await _context.SaveChangesAsync().ConfigureAwait(false);
 
             _logger.LogInformation($"The client: {entity} was successfully deleted.");
@@ -93,7 +94,7 @@ namespace ClientApi.Repository
             entity.Age = model.Age;
             entity.ContactNumber = model.ContactNumber;
             entity.Email = model.Email;
-            entity.AllowEmailNotification = model.AllowEmailNotification;
+            entity.MasterId = model.MasterId;
 
             await _context.SaveChangesAsync().ConfigureAwait(false);
 
