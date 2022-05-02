@@ -20,9 +20,8 @@
 
   <ItemGroup>
     <Folder Include="Boundary\Master\RequestModels\" />
-    <Folder Include="Domain\" />
-    <Folder Include="Factories\" />
     <Folder Include="Handlers\" />
+    <Folder Include="Infrastructure\Validators\" />
   </ItemGroup>
 
 

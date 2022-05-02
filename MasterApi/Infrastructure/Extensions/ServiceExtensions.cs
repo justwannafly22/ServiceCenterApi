@@ -1,4 +1,5 @@
-﻿using MasterApi.Repository;
+﻿using MasterApi.Factories;
+using MasterApi.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

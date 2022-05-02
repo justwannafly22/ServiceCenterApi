@@ -1,4 +1,5 @@
 using FluentValidation.AspNetCore;
+using MasterApi.Infrastructure.Exceptions;
 using MasterApi.Infrastructure.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -48,7 +49,7 @@ namespace MasterApi
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            // app.UseMiddleware<ExceptionHandler>();
+            app.UseMiddleware<ExceptionHandler>();
 
             app.UseSwagger();
             app.UseSwaggerUI();
