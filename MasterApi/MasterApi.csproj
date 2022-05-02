@@ -19,8 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Boundary\Master\RequestModels\" />
-    <Folder Include="Handlers\" />
     <Folder Include="Infrastructure\Validators\" />
   </ItemGroup>
 
