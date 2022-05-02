@@ -1,32 +1,29 @@
-﻿using ClientApi.Boundary.Client.RequestModels;
-using ClientApi.Boundary.Client.ResponseModels;
+﻿using MasterApi.Boundary.Master.RequestModels;
 using MediatR;
 using System;
 
-namespace ClientApi.Boundary.Client
+namespace MasterApi.Boundary.Master
 {
-    public class UpdateClientModel : IRequest<ClientResponseModel>
+    public class UpdateMasterModel : IRequest<MasterResponseModel>
     {
-        public UpdateClientModel(UpdateClientRequestModel model)
+        public UpdateMasterModel(UpdateMasterRequestModel model)
         {
             Name = model.Name;
             Surname = model.Surname;
             Age = model.Age;
             ContactNumber = model.ContactNumber;
-            Email = model.Email;
         }
 
-        public UpdateClientModel(UpdateClientRequestModel model, Guid id)
+        public UpdateMasterModel(UpdateMasterRequestModel model, Guid id)
         {
             Id = id;
             Name = model.Name;
             Surname = model.Surname;
             Age = model.Age;
             ContactNumber = model.ContactNumber;
-            Email = model.Email;
         }
 
-        public UpdateClientModel() { }
+        public UpdateMasterModel() { }
 
         public Guid Id { get; set; }
 
@@ -37,9 +34,5 @@ namespace ClientApi.Boundary.Client
         public int Age { get; set; }
 
         public string ContactNumber { get; set; }
-
-        public string Email { get; set; }
-
-        public Guid MasterId { get; set; }
     }
 }
