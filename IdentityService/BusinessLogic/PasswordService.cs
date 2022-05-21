@@ -16,17 +16,17 @@ namespace IdentityService.BusinessLogic
             }
         }
 
-        public static (string hashedPassword, string salt) HashPassword(string password)
+        public static string HashPassword(string password)
         {
             try
             {
                 var salt = BCrypt.Net.BCrypt.GenerateSalt();
                 var hashedPassword = BCrypt.Net.BCrypt.HashPassword(password, salt);
-                return (hashedPassword, salt);
+                return hashedPassword;
             }
             catch (Exception)
             {
-                return (string.Empty, string.Empty);
+                return string.Empty;
             }
         }
     }

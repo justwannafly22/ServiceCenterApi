@@ -25,15 +25,18 @@ namespace IdentityService.BusinessLogic
             _configuration = configuration;
         }
 
-        public async Task CreateUser(UserRequestModel request)
+        public async Task<IdentityResult> CreateUser(UserRequestModel request)
         {
             var user = new User()
             {
                 EmailOrLogin = request.EmailOrLogin,
-                Password = request.Password
+                Password = PasswordService.HashPassword(request.Password)
             };
 
+            var result = await _userManager.CreateAsync(user, user.Password);
+            await _userManager.AddToRolesAsync(user, request.Roles);
 
+            return result;
         }
 
         public async Task<string> CreateToken()
@@ -45,11 +48,12 @@ namespace IdentityService.BusinessLogic
             return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
         }
 
-        public async Task<bool> ValidateUser(UserRequestModel userForAuth)
+        public async Task<bool> ValidateUser(UserAuthRequestModel userForAuth)
         {
             _user = await _userManager.FindByNameAsync(userForAuth.EmailOrLogin);
 
-            return (_user != null && await _userManager.CheckPasswordAsync(_user, userForAuth.Password));
+            var hashedPassword = PasswordService.HashPassword(userForAuth.Password);
+            return (_user != null && await _userManager.CheckPasswordAsync(_user, hashedPassword));
         }
 
         private SigningCredentials GetSingningCredentials()

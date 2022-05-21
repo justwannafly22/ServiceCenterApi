@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace IdentityService.Controllers
 {
     [ApiController]
-    [Route("api/v1/clients")]
+    [Route("api/v1/auth")]
     [ApiExplorerSettings(GroupName = "v1")]
     public class AuthenticationController : BaseController
     {
@@ -24,10 +24,10 @@ namespace IdentityService.Controllers
             _logger = logger;
         }
 
-        [HttpPost]
+        [HttpPost("register-user")]
         public async Task<IActionResult> RegisterUser([FromBody] UserRequestModel userForRegistration)
         {
-            var result = await _userManager.CreateAsync(user, userForRegistration.Password);
+            var result = await _authManager.CreateUser(userForRegistration);
 
             if (!result.Succeeded)
             {
@@ -37,18 +37,17 @@ namespace IdentityService.Controllers
                 return BadRequest(ModelState);
             }
 
-            await _userManager.AddToRolesAsync(user, userForRegistration.Roles);
+            _logger.LogInformation("User successfully created.");
 
             return StatusCode(201);
         }
 
         [HttpPost("login")]
-        [ServiceFilter(typeof(ValidationFilterAttribute))]
-        public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto userForAuth)
+        public async Task<IActionResult> Authenticate([FromBody] UserAuthRequestModel userForAuth)
         {
             if (!await _authManager.ValidateUser(userForAuth))
             {
-                _logger.LogWarn($"{nameof(Authenticate)}: Authenticaton failed. Wrong user name or password.");
+                _logger.LogWarning($"{nameof(Authenticate)}: Authenticaton failed. Wrong user name or password.");
                 return Unauthorized();
             }
 

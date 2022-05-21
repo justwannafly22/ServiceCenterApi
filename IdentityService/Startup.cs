@@ -1,7 +1,9 @@
 using IdentityService.Infrastructure;
 using IdentityService.Infrastructure.Extensions;
+using IdentityService.Repository.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,6 +27,7 @@ namespace IdentityService
             //services.AddAuthentication();
             services.ConfigureIdentity();
             services.ConfigureJWT(Configuration);
+            services.ConfigureLogic();
 
             services.AddSwaggerGen(c =>
             {
@@ -35,6 +38,9 @@ namespace IdentityService
                     Description = "Identity API"
                 });
             });
+
+            services.AddDbContext<RepositoryDbContext>(opts =>
+                opts.UseSqlServer(Configuration.GetConnectionString("sqlConnection")));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

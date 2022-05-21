@@ -1,4 +1,5 @@
-﻿using IdentityService.Repository.Entities;
+﻿using IdentityService.BusinessLogic;
+using IdentityService.Repository.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -11,6 +12,11 @@ namespace IdentityService.Infrastructure.Extensions
 {
     public static class ServiceExtensions
     {
+        public static void ConfigureLogic(this IServiceCollection services)
+        {
+            services.AddScoped<IAuthenticationManager, AuthenticationManager>();
+        }
+
         public static void ConfigureIdentity(this IServiceCollection services)
         {
             var builder = services.AddIdentityCore<User>(o =>
