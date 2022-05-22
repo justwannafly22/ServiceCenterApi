@@ -54,7 +54,7 @@ namespace IdentityService.Controllers
             return Ok(new { Token = await _authManager.CreateToken() });
         }
 
-        [HttpPost]
+        [HttpPost("get-permissions")]
         public async Task<IActionResult> Permissions([FromBody] string token)
         {
             if (string.IsNullOrWhiteSpace(token))
