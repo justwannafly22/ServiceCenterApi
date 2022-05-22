@@ -34,8 +34,8 @@ namespace IdentityService
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Identity API",
-                    Description = "Identity API"
+                    Title = "Identity Service",
+                    Description = "Identity Service"
                 });
             });
 
