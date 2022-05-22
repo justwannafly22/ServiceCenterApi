@@ -25,9 +25,9 @@ namespace IdentityService.Controllers
         }
 
         [HttpPost("register-user")]
-        public async Task<IActionResult> RegisterUser([FromBody] UserRequestModel userForRegistration)
+        public async Task<IActionResult> RegisterUser([FromBody] UserRequestModel user)
         {
-            var result = await _authManager.CreateUser(userForRegistration);
+            var result = await _authManager.CreateUser(user);
 
             if (!result.Succeeded)
             {
@@ -43,15 +43,28 @@ namespace IdentityService.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Authenticate([FromBody] UserAuthRequestModel userForAuth)
+        public async Task<IActionResult> Authenticate([FromBody] UserRequestModel user)
         {
-            if (!await _authManager.ValidateUser(userForAuth))
+            if (!await _authManager.ValidateUser(user))
             {
                 _logger.LogWarning($"{nameof(Authenticate)}: Authenticaton failed. Wrong user name or password.");
                 return Unauthorized();
             }
 
             return Ok(new { Token = await _authManager.CreateToken() });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Permissions([FromBody] string token)
+        {
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                return BadRequest("Token is missing!");
+            };
+
+            var permissions = await _authManager.GetPermissions(token);
+
+            return Ok(permissions);
         }
     }
 }

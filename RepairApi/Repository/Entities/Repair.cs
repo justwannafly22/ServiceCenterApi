@@ -22,5 +22,8 @@ namespace RepairApi.Repository.Entities
 
         [Column("client_id")]
         public Guid ClientId { get; set; }
+
+        [Column("master_id")]
+        public Guid MasterId { get; set; }
     }
 }
