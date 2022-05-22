@@ -36,7 +36,8 @@ namespace IdentityService.BusinessLogic
             var user = new User()
             {
                 EmailOrLogin = request.EmailOrLogin,
-                Password = PasswordService.HashPassword(request.Password)
+                Password = PasswordService.HashPassword(request.Password),
+                AttendeeId = request.AttendeeId
             };
 
             var result = await _userManager.CreateAsync(user, user.Password);

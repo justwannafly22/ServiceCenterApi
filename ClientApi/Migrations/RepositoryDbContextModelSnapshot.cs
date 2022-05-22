@@ -30,6 +30,10 @@ namespace ClientApi.Migrations
                         .HasColumnName("age")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("AttendeeId")
+                        .HasColumnName("attendee_id")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("ContactNumber")
                         .IsRequired()
                         .HasColumnName("contact_number")
@@ -40,10 +44,6 @@ namespace ClientApi.Migrations
                         .HasColumnName("email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("MasterId")
-                        .HasColumnName("master_id")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnName("client_name")
@@ -52,10 +52,6 @@ namespace ClientApi.Migrations
                     b.Property<string>("Surname")
                         .IsRequired()
                         .HasColumnName("client_surname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnName("user_id")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

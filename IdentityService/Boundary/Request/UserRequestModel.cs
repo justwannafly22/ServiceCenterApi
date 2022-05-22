@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace IdentityService.Boundary.Request
 {
@@ -9,5 +10,8 @@ namespace IdentityService.Boundary.Request
 
         [Required]
         public string Password { get; set; }
+
+        [Required]
+        public Guid AttendeeId { get; set; }
     }
 }
