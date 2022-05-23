@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using ReplacedPartApi.Infrastructure.Exceptions;
 using ReplacedPartApi.Infrastructure.Extensions;
+using System;
 using System.Reflection;
 
 namespace ReplacedPartApi
@@ -30,9 +31,35 @@ namespace ReplacedPartApi
                 s.RegisterValidatorsFromAssemblyContaining<Startup>();
             });
 
-            services.AddSwaggerGen(c =>
+            services.ConfigureJWT();
+            services.AddSwaggerGen(opt =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo
+                opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\""
+                });
+
+                opt.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
+
+                opt.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
                     Title = "Replaced Part API",
@@ -59,6 +86,9 @@ namespace ReplacedPartApi
             }
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             #region Cors configuring
             app.UseCors(builder => builder

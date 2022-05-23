@@ -19,7 +19,9 @@ namespace MasterApi.Factories
                 Name = model.Name,
                 Surname = model.Surname,
                 Age = model.Age,
-                ContactNumber = model.ContactNumber
+                ContactNumber = model.ContactNumber,
+                Email = model.Email,
+                AttendeeId = model.AttendeeId
             };
         }
 
@@ -36,7 +38,9 @@ namespace MasterApi.Factories
                 Name = model.Name,
                 Surname = model.Surname,
                 Age = model.Age,
-                ContactNumber = model.ContactNumber
+                ContactNumber = model.ContactNumber,
+                Email = model.Email,
+                AttendeeId = model.AttendeeId
             };
         }
     }

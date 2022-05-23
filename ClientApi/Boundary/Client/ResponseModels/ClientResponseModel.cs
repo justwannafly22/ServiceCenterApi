@@ -14,6 +14,6 @@ namespace ClientApi.Boundary.Client.ResponseModels
 
         public string Email { get; set; }
 
-        public Guid MasterId { get; set; }
+        public Guid AttendeeId { get; set; }
     }
 }

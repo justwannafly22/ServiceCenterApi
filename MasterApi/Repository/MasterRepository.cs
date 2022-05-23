@@ -100,6 +100,8 @@ namespace MasterApi.Repository
             entity.Surname = model.Surname;
             entity.Age = model.Age;
             entity.ContactNumber = model.ContactNumber;
+            entity.Email = model.Email;
+            entity.AttendeeId = model.AttendeeId;
 
             await _context.SaveChangesAsync().ConfigureAwait(false);
 

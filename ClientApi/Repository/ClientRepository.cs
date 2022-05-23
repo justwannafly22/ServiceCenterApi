@@ -94,7 +94,7 @@ namespace ClientApi.Repository
             entity.Age = model.Age;
             entity.ContactNumber = model.ContactNumber;
             entity.Email = model.Email;
-            entity.MasterId = model.MasterId;
+            entity.AttendeeId = model.AttendeeId;
 
             await _context.SaveChangesAsync().ConfigureAwait(false);
 

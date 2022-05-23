@@ -31,10 +31,7 @@ namespace ClientApi.Repository.Entities
         [Required]
         public string Email { get; set; }
 
-        [Column("master_id")]
-        public Guid MasterId { get; set; }
-
-        [Column("user_id")]
-        public string UserId { get; set; }
+        [Column("attendee_id")]
+        public Guid AttendeeId { get; set; }
     }
 }

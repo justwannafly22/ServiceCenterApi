@@ -16,6 +16,6 @@ namespace ClientApi.Domain
 
         public string Email { get; set; }
 
-        public Guid MasterId { get; set; }
+        public Guid AttendeeId { get; set; }
     }
 }

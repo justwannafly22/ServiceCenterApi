@@ -30,9 +30,18 @@ namespace MasterApi.Migrations
                         .HasColumnName("age")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("AttendeeId")
+                        .HasColumnName("attendee_id")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("ContactNumber")
                         .IsRequired()
                         .HasColumnName("contact_number")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnName("email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")

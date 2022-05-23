@@ -21,7 +21,7 @@ namespace ClientApi.Factories
                 Age = model.Age,
                 ContactNumber = model.ContactNumber,
                 Email = model.Email,
-                MasterId = model.MasterId
+                AttendeeId = model.AttendeeId
             };
         }
 
@@ -40,7 +40,7 @@ namespace ClientApi.Factories
                 Age = client.Age,
                 ContactNumber = client.ContactNumber,
                 Email = client.Email,
-                MasterId = client.MasterId
+                AttendeeId = client.AttendeeId
             };
         }
     }

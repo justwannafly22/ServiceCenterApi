@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepairApi", "RepairApi\Repa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReplacedPartApi", "ReplacedPartApi\ReplacedPartApi.csproj", "{0E3A0713-9281-45A3-91D6-6FCC4978AF03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterApi", "MasterApi\MasterApi.csproj", "{F9D8EF5D-A600-499D-9681-8F8D73CAB32D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MasterApi", "MasterApi\MasterApi.csproj", "{F9D8EF5D-A600-499D-9681-8F8D73CAB32D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityService", "IdentityService\IdentityService.csproj", "{74514144-AD84-4D7A-B7C2-C3D269D7B171}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{F9D8EF5D-A600-499D-9681-8F8D73CAB32D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9D8EF5D-A600-499D-9681-8F8D73CAB32D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9D8EF5D-A600-499D-9681-8F8D73CAB32D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74514144-AD84-4D7A-B7C2-C3D269D7B171}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74514144-AD84-4D7A-B7C2-C3D269D7B171}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74514144-AD84-4D7A-B7C2-C3D269D7B171}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74514144-AD84-4D7A-B7C2-C3D269D7B171}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
