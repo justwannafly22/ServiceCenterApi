@@ -75,6 +75,19 @@ namespace ClientApi.Factories
                 Id = model.Id
             };
         }
+        
+        public ClientDomainModel ToDomain(GetClientByAttendeeIdRequestModel model)
+        {
+            if (model is null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            return new ClientDomainModel
+            {
+                AttendeeId = model.AttendeeId
+            };
+        }
 
         public ClientDomainModel ToDomain(DeleteClientRequestModel model)
         {

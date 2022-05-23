@@ -10,6 +10,7 @@ namespace ClientApi.Factories
         ClientDomainModel ToDomain(CreateClientRequestModel model);
         ClientDomainModel ToDomain(UpdateClientRequestModel model);
         ClientDomainModel ToDomain(GetClientByIdRequestModel model);
+        ClientDomainModel ToDomain(GetClientByAttendeeIdRequestModel model);
         ClientDomainModel ToDomain(DeleteClientRequestModel model);
         ClientResponseModel ToResponseModel(ClientDomainModel model);
         ClientDomainModel ToDomain(UpdateClientModel model);

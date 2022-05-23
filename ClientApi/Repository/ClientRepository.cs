@@ -79,6 +79,20 @@ namespace ClientApi.Repository
 
             return _factory.ToDomain(entity);
         }
+        
+        public async Task<ClientDomainModel> GetByAttendeeIdAsync(ClientDomainModel model)
+        {
+            if (model is null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            var entity = await GetClientByExpression(e => e.AttendeeId.Equals(model.AttendeeId)).SingleOrDefaultAsync().ConfigureAwait(false);
+
+            _logger.LogInformation($"The client table was triggered.");
+
+            return _factory.ToDomain(entity);
+        }
 
         public async Task<ClientDomainModel> UpdateAsync(ClientDomainModel model)
         {

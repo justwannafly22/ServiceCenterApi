@@ -61,6 +61,31 @@ namespace ClientApi.Controllers
 
             return Ok(client);
         }
+        
+        /// <summary>
+        /// Returns a client
+        /// </summary>
+        /// <param name="id"></param>
+        /// <response code="200">Success. Client model was received successfully</response>
+        /// <response code="400">Bad request</response>
+        /// <response code="404">Client with provided id cannot be found</response>
+        /// <response code="500">Internal Server Error</response>
+        [ProducesResponseType(typeof(ClientResponseModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status500InternalServerError)]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetByAttendeeId([FromRoute] GetClientByAttendeeIdRequestModel model)
+        {
+            var client = await _mediator.Send(model).ConfigureAwait(false);
+
+            if (client is null)
+            {
+                return NotFound(new BaseResponseModel($"Client with attendee id: {model.AttendeeId} doesn`t exist in the database.", HttpStatusCode.NotFound));
+            }
+
+            return Ok(client);
+        }
 
         /// <summary>
         /// Create a client
