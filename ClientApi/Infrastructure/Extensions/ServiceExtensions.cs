@@ -1,7 +1,9 @@
 ﻿using ClientApi.Factories;
+using ClientApi.Infrastructure.Authorization;
 using ClientApi.Repository;
 using ClientApi.Repository.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -20,6 +22,7 @@ namespace ClientApi.Infrastructure.Extensions
         public static void ConfigureRepository(this IServiceCollection services)
         {
             services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddSingleton<IAuthorizationHandler, TokenAuthorizationHandler>();
         }
         
         public static void ConfigureJWT(this IServiceCollection services)
@@ -27,22 +30,23 @@ namespace ClientApi.Infrastructure.Extensions
             Environment.SetEnvironmentVariable("SECRET", "ServiceCenterApi");
             var secretKey = Environment.GetEnvironmentVariable("SECRET");
 
-            services
-                .AddAuthentication(opt =>
-                {
-                    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                })
-                .AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
+            services.AddAuthentication(TokenAuthenticationHandler.AuthenticationScheme)
+                .AddScheme<TokenKeyOptions, TokenAuthenticationHandler>(TokenAuthenticationHandler.AuthenticationScheme, _ => { });
 
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
-                    };
+            services.AddAuthorization(opt =>
+            {
+                opt.AddPolicy("default", policy =>
+                {
+                    policy.AddAuthenticationSchemes(TokenAuthenticationHandler.AuthenticationScheme);
+                    policy.RequireAuthenticatedUser();
                 });
+
+                opt.AddPolicy(TokenAuthorizationHandler.Policy, policy =>
+                {
+                    policy.AddAuthenticationSchemes(TokenAuthenticationHandler.AuthenticationScheme);
+                    policy.Requirements.Add(new TokenRequirement());
+                });
+            });
         }
     }
 }
