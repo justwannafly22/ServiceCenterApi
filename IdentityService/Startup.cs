@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
 
 namespace IdentityService
 {
@@ -22,6 +23,7 @@ namespace IdentityService
 
         public void ConfigureServices(IServiceCollection services)
         {
+            Environment.SetEnvironmentVariable("SECRET", "ServiceCenterApi");
             services.AddControllers();
             // ToDo: Do we really need this?
             //services.AddAuthentication();

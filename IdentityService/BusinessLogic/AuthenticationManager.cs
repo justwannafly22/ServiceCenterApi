@@ -19,28 +19,31 @@ namespace IdentityService.BusinessLogic
     {
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
-        private readonly JwtBuilder _jwtBuilder;
+        private readonly JwtSecurityTokenHandler _jwtHandler;
 
         private User _user;
         private const string AttendeeId = "AttendeeId";
+        private const string Username = "Username";
 
         public AuthenticationManager(UserManager<User> userManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _configuration = configuration;
-            _jwtBuilder = JwtBuilder.Create();
+            _jwtHandler = new JwtSecurityTokenHandler();
         }
 
         public async Task<IdentityResult> CreateUser(UserRequestModel request)
         {
             var user = new User()
             {
-                EmailOrLogin = request.EmailOrLogin,
+                UserName = request.Email,
+                Email = request.Email,
                 Password = PasswordService.HashPassword(request.Password),
                 AttendeeId = request.AttendeeId
             };
 
             var result = await _userManager.CreateAsync(user, user.Password);
+            await _userManager.AddToRoleAsync(user, request.Role);
 
             return result;
         }
@@ -54,12 +57,11 @@ namespace IdentityService.BusinessLogic
             return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
         }
 
-        public async Task<bool> ValidateUser(UserRequestModel request)
+        public async Task<bool> ValidateUser(AuthUser request)
         {
-            _user = await _userManager.FindByNameAsync(request.EmailOrLogin);
+            _user = await _userManager.FindByEmailAsync(request.Email);
 
-            var hashedPassword = PasswordService.HashPassword(request.Password);
-            return (_user != null && await _userManager.CheckPasswordAsync(_user, hashedPassword));
+            return PasswordService.DoesPasswordMatch(request.Password, _user.Password);
         }
 
         private SigningCredentials GetSingningCredentials()
@@ -74,7 +76,7 @@ namespace IdentityService.BusinessLogic
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, _user.UserName),
+                new Claim(Username, _user.UserName),
                 new Claim(AttendeeId, _user.AttendeeId.ToString())
             };
 
@@ -86,8 +88,6 @@ namespace IdentityService.BusinessLogic
             var jwtSettings = _configuration.GetSection("JwtSettings");
 
             var tokenOptions = new JwtSecurityToken(
-                issuer: jwtSettings.GetSection("validIssuer").Value,
-                audience: jwtSettings.GetSection("validAudience").Value,
                 claims: claims,
                 expires: DateTime.Now.AddSeconds(Convert.ToDouble(jwtSettings.GetSection("expires").Value)),
                 signingCredentials: signingCredentials
@@ -98,7 +98,7 @@ namespace IdentityService.BusinessLogic
 
         public async Task<UserResponseModel> GetPermissions(string token)
         {
-            var claims = _jwtBuilder.Decode<IDictionary<string, object>>(token);
+            var claims = _jwtHandler.ReadJwtToken(token).Claims;
             if (claims is null)
             {
                 throw new Exception("Failed to extract claims from token.");
@@ -106,7 +106,7 @@ namespace IdentityService.BusinessLogic
 
             var attendeeClaim = GetClaim(claims, AttendeeId);
             var attendeeId = ParseIntoGuid(attendeeClaim.ToString());
-            var emailOrLoginName = GetClaim(claims, ClaimTypes.Name).ToString();
+            var emailOrLoginName = GetClaim(claims, Username).ToString();
 
             var user = await _userManager.FindByNameAsync(emailOrLoginName);
             var roles = await _userManager.GetRolesAsync(user);
@@ -118,9 +118,9 @@ namespace IdentityService.BusinessLogic
             };
         }
 
-        private static object GetClaim(IDictionary<string, object> claims, string claimName)
+        private static object GetClaim(IEnumerable<Claim> claims, string claimName)
         {
-            return claims.FirstOrDefault(x => x.Key.Equals(claimName)).Value;
+            return claims.FirstOrDefault(x => x.Type.Equals(claimName)).Value;
         }
 
         private static Guid ParseIntoGuid(string claimValue)

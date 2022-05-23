@@ -7,7 +7,7 @@ namespace IdentityService.BusinessLogic
 {
     public interface IAuthenticationManager
     {
-        Task<bool> ValidateUser(UserRequestModel userForAuth);
+        Task<bool> ValidateUser(AuthUser userForAuth);
         Task<string> CreateToken();
         Task<IdentityResult> CreateUser(UserRequestModel request);
         Task<UserResponseModel> GetPermissions(string token);

@@ -29,7 +29,11 @@ namespace MasterApi.Repository
         [Required]
         public string ContactNumber { get; set; }
 
+        [Column("email")]
+        [Required]
+        public string Email { get; set; }
+
         [Column("attendee_id")]
-        public string AttendeeId { get; set; }
+        public Guid AttendeeId { get; set; }
     }
 }

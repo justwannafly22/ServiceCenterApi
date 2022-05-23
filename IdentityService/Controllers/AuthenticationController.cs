@@ -17,11 +17,11 @@ namespace IdentityService.Controllers
         private readonly UserManager<User> _userManager;
         private readonly ILogger _logger;
 
-        public AuthenticationController(IAuthenticationManager authManager, UserManager<User> userManager, ILogger logger)
+        public AuthenticationController(IAuthenticationManager authManager, UserManager<User> userManager/*, ILogger logger*/)
         {
             _authManager = authManager;
             _userManager = userManager;
-            _logger = logger;
+            //_logger = logger;
         }
 
         [HttpPost("register-user")]
@@ -37,17 +37,17 @@ namespace IdentityService.Controllers
                 return BadRequest(ModelState);
             }
 
-            _logger.LogInformation("User successfully created.");
+            //_logger.LogInformation("User successfully created.");
 
             return StatusCode(201);
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Authenticate([FromBody] UserRequestModel user)
+        public async Task<IActionResult> Authenticate([FromBody] AuthUser user)
         {
             if (!await _authManager.ValidateUser(user))
             {
-                _logger.LogWarning($"{nameof(Authenticate)}: Authenticaton failed. Wrong user name or password.");
+                //_logger.LogWarning($"{nameof(Authenticate)}: Authenticaton failed. Wrong user name or password.");
                 return Unauthorized();
             }
 
