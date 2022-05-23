@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using RepairApi.Infrastructure.Authorization;
 using System.Linq;
 
 namespace RepairApi.Controllers
 {
-    [Authorize]
+    [Authorize(TokenAuthorizationHandler.Policy)]
     public class BaseController : Controller
     {
         public static string GetErrorMessage(ModelStateDictionary modelState)
