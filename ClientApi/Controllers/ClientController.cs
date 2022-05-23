@@ -68,7 +68,7 @@ namespace ClientApi.Controllers
         /// <param name="id"></param>
         /// <response code="200">Success. Client model was received successfully</response>
         /// <response code="400">Bad request</response>
-        /// <response code="404">Client with provided id cannot be found</response>
+        /// <response code="404">Client with provided attendee id cannot be found</response>
         /// <response code="500">Internal Server Error</response>
         [ProducesResponseType(typeof(ClientResponseModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status400BadRequest)]
