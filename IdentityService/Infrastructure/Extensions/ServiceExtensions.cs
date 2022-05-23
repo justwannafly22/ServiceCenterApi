@@ -33,9 +33,8 @@ namespace IdentityService.Infrastructure.Extensions
             builder.AddEntityFrameworkStores<RepositoryDbContext>().AddDefaultTokenProviders();
         }
 
-        public static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
+        public static void ConfigureJWT(this IServiceCollection services)
         {
-            var jwtSettings = configuration.GetSection("JwtSettings");
             var secretKey = Environment.GetEnvironmentVariable("SECRET");
 
             services

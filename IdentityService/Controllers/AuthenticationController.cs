@@ -1,6 +1,7 @@
 ﻿using IdentityService.Boundary.Request;
 using IdentityService.BusinessLogic;
 using IdentityService.Repository.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -54,6 +55,7 @@ namespace IdentityService.Controllers
             return Ok(new { Token = await _authManager.CreateToken() });
         }
 
+        [Authorize]
         [HttpPost("get-permissions")]
         public async Task<IActionResult> Permissions([FromBody] string token)
         {

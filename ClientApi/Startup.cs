@@ -27,6 +27,7 @@ namespace ClientApi
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddControllers();
 
+            services.ConfigureJWT();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -59,6 +60,9 @@ namespace ClientApi
             }
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             #region Cors configuring
             app.UseCors(builder => builder

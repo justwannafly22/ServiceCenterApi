@@ -25,10 +25,9 @@ namespace IdentityService
         {
             Environment.SetEnvironmentVariable("SECRET", "ServiceCenterApi");
             services.AddControllers();
-            // ToDo: Do we really need this?
-            //services.AddAuthentication();
+
             services.ConfigureIdentity();
-            services.ConfigureJWT(Configuration);
+            services.ConfigureJWT();
             services.ConfigureLogic();
 
             services.AddSwaggerGen(c =>
@@ -58,6 +57,8 @@ namespace IdentityService
             }
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             #region Cors configuring
             app.UseCors(builder => builder
