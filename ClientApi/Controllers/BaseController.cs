@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using ClientApi.Infrastructure.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Linq;
 
 namespace ClientApi.Controllers
 {
-    [Authorize]
+    [Authorize(TokenAuthorizationHandler.Policy)]
     public class BaseController : Controller
     {
         public static string GetErrorMessage(ModelStateDictionary modelState)
