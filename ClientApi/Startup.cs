@@ -87,9 +87,6 @@ namespace ClientApi
 
             app.UseRouting();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
-
             #region Cors configuring
             app.UseCors(builder => builder
                 .AllowAnyOrigin()

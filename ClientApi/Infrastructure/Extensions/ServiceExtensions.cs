@@ -2,12 +2,9 @@
 using ClientApi.Infrastructure.Authorization;
 using ClientApi.Repository;
 using ClientApi.Repository.Interfaces;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Text;
 
 namespace ClientApi.Infrastructure.Extensions
 {
@@ -22,7 +19,6 @@ namespace ClientApi.Infrastructure.Extensions
         public static void ConfigureRepository(this IServiceCollection services)
         {
             services.AddScoped<IClientRepository, ClientRepository>();
-            services.AddSingleton<IAuthorizationHandler, TokenAuthorizationHandler>();
         }
         
         public static void ConfigureJWT(this IServiceCollection services)
@@ -47,6 +43,8 @@ namespace ClientApi.Infrastructure.Extensions
                     policy.Requirements.Add(new TokenRequirement());
                 });
             });
+
+            services.AddSingleton<IAuthorizationHandler, TokenAuthorizationHandler>();
         }
     }
 }
