@@ -1,5 +1,6 @@
 ﻿using IdentityService.Boundary.Request;
 using IdentityService.BusinessLogic;
+using IdentityService.Infrastructure.Authorization;
 using IdentityService.Repository.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -15,14 +16,10 @@ namespace IdentityService.Controllers
     public class AuthenticationController : BaseController
     {
         private readonly IAuthenticationManager _authManager;
-        private readonly UserManager<User> _userManager;
-        private readonly ILogger _logger;
 
-        public AuthenticationController(IAuthenticationManager authManager, UserManager<User> userManager/*, ILogger logger*/)
+        public AuthenticationController(IAuthenticationManager authManager)
         {
             _authManager = authManager;
-            _userManager = userManager;
-            //_logger = logger;
         }
 
         [HttpPost("register-user")]
@@ -38,8 +35,6 @@ namespace IdentityService.Controllers
                 return BadRequest(ModelState);
             }
 
-            //_logger.LogInformation("User successfully created.");
-
             return StatusCode(201);
         }
 
@@ -48,14 +43,13 @@ namespace IdentityService.Controllers
         {
             if (!await _authManager.ValidateUser(user))
             {
-                //_logger.LogWarning($"{nameof(Authenticate)}: Authenticaton failed. Wrong user name or password.");
                 return Unauthorized();
             }
 
             return Ok(new { Token = await _authManager.CreateToken() });
         }
 
-        [Authorize]
+        [Authorize(TokenAuthorizationHandler.Policy)]
         [HttpPost("get-permissions")]
         public async Task<IActionResult> Permissions([FromBody] string token)
         {
