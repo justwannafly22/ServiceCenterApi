@@ -35,7 +35,7 @@ namespace IdentityService.Controllers
                 return BadRequest(ModelState);
             }
 
-            return StatusCode(201);
+            return Ok(new { Token = await _authManager.CreateToken() });
         }
 
         [HttpPost("login")]
