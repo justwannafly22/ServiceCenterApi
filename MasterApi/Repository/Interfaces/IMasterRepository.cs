@@ -11,5 +11,6 @@ namespace MasterApi.Repository
         Task<List<MasterDomainModel>> GetAllAsync();
         Task<MasterDomainModel> GetByIdAsync(MasterDomainModel model);
         Task<MasterDomainModel> UpdateAsync(MasterDomainModel model);
+        Task<MasterDomainModel> GetByAttendeeIdAsync(MasterDomainModel model);
     }
 }

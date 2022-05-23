@@ -60,6 +60,31 @@ namespace MasterApi.Controllers
 
             return Ok(client);
         }
+        
+        /// <summary>
+        /// Returns a master
+        /// </summary>
+        /// <param name="id"></param>
+        /// <response code="200">Success. Master model was received successfully</response>
+        /// <response code="400">Bad request</response>
+        /// <response code="404">Master with provided attendee id cannot be found</response>
+        /// <response code="500">Internal Server Error</response>
+        [ProducesResponseType(typeof(MasterResponseModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status500InternalServerError)]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetByAttendeeId([FromRoute] GetMasterByAttendeeIdRequestModel model)
+        {
+            var client = await _mediator.Send(model).ConfigureAwait(false);
+
+            if (client is null)
+            {
+                return NotFound(new BaseResponseModel($"Master with attendee id: {model.AttendeeId} doesn`t exist in the database.", HttpStatusCode.NotFound));
+            }
+
+            return Ok(client);
+        }
 
         /// <summary>
         /// Create a master

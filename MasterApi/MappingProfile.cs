@@ -15,6 +15,7 @@ namespace MasterApi
             CreateMap<CreateMasterRequestModel, MasterDomainModel>();
             CreateMap<UpdateMasterModel, MasterDomainModel>();
             CreateMap<GetMasterByIdRequestModel, MasterDomainModel>();
+            CreateMap<GetMasterByAttendeeIdRequestModel, MasterDomainModel>();
             CreateMap<GetAllMastersRequestModel, MasterDomainModel>();
             CreateMap<DeleteMasterRequestModel, MasterDomainModel>();
         }

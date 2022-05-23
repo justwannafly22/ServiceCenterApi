@@ -84,6 +84,22 @@ namespace MasterApi.Repository
 
             return _factory.ToDomain(entity);
         }
+        
+        public async Task<MasterDomainModel> GetByAttendeeIdAsync(MasterDomainModel model)
+        {
+            if (model is null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            var entity = await GetRepairByExpression(r => r.AttendeeId.Equals(model.AttendeeId))
+                              .SingleOrDefaultAsync()
+                              .ConfigureAwait(false);
+
+            _logger.LogInformation($"The master table was triggered.");
+
+            return _factory.ToDomain(entity);
+        }
 
         public async Task<MasterDomainModel> UpdateAsync(MasterDomainModel model)
         {
