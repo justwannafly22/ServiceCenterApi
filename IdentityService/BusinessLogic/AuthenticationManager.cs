@@ -44,6 +44,7 @@ namespace IdentityService.BusinessLogic
 
             var result = await _userManager.CreateAsync(user, user.Password);
             await _userManager.AddToRoleAsync(user, request.Role);
+            _user = user;
 
             return result;
         }
