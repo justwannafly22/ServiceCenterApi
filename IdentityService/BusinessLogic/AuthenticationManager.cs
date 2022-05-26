@@ -38,8 +38,7 @@ namespace IdentityService.BusinessLogic
             {
                 UserName = request.Email,
                 Email = request.Email,
-                Password = PasswordService.HashPassword(request.Password),
-                AttendeeId = request.AttendeeId
+                Password = PasswordService.HashPassword(request.Password)
             };
 
             var result = await _userManager.CreateAsync(user, user.Password);
@@ -78,7 +77,7 @@ namespace IdentityService.BusinessLogic
             var claims = new List<Claim>
             {
                 new Claim(Username, _user.UserName),
-                new Claim(AttendeeId, _user.AttendeeId.ToString())
+                new Claim(AttendeeId, _user.Id.ToString())
             };
 
             return claims;
@@ -105,8 +104,6 @@ namespace IdentityService.BusinessLogic
                 throw new Exception("Failed to extract claims from token.");
             }
 
-            var attendeeClaim = GetClaim(claims, AttendeeId);
-            var attendeeId = ParseIntoGuid(attendeeClaim.ToString());
             var emailOrLoginName = GetClaim(claims, Username).ToString();
 
             var user = await _userManager.FindByNameAsync(emailOrLoginName);
@@ -114,7 +111,7 @@ namespace IdentityService.BusinessLogic
 
             return new UserResponseModel
             {
-                AttendeeId = attendeeId,
+                AttendeeId = new Guid(user.Id),
                 Roles = roles
             };
         }
@@ -122,13 +119,6 @@ namespace IdentityService.BusinessLogic
         private static object GetClaim(IEnumerable<Claim> claims, string claimName)
         {
             return claims.FirstOrDefault(x => x.Type.Equals(claimName)).Value;
-        }
-
-        private static Guid ParseIntoGuid(string claimValue)
-        {
-            return string.IsNullOrWhiteSpace(claimValue)
-                ? Guid.Empty
-                : Guid.TryParse(claimValue, out var guid) ? guid : Guid.Empty;
         }
     }
 }

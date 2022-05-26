@@ -12,9 +12,6 @@ namespace IdentityService.Boundary.Request
         public string Password { get; set; }
 
         [Required]
-        public Guid AttendeeId { get; set; }
-
-        [Required]
         public string Role { get; set; }
     }
 

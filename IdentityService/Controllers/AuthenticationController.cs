@@ -51,14 +51,14 @@ namespace IdentityService.Controllers
 
         [Authorize(TokenAuthorizationHandler.Policy)]
         [HttpPost("get-permissions")]
-        public async Task<IActionResult> Permissions([FromBody] string token)
+        public async Task<IActionResult> Permissions([FromBody] PermissionRequestModel request)
         {
-            if (string.IsNullOrWhiteSpace(token))
+            if (string.IsNullOrWhiteSpace(request.Token))
             {
                 return BadRequest("Token is missing!");
             };
 
-            var permissions = await _authManager.GetPermissions(token);
+            var permissions = await _authManager.GetPermissions(request.Token);
 
             return Ok(permissions);
         }
