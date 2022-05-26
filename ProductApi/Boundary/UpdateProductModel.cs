@@ -10,14 +10,12 @@ namespace ProductApi.Boundary
         {
             Id = id;
             Name = model.Name;
-            Price = model.Price;
             Description = model.Description;
         }
 
         public UpdateProductModel(UpdateProductRequestModel model) 
         {
             Name = model.Name;
-            Price = model.Price;
             Description = model.Description;
         }
 
@@ -25,7 +23,6 @@ namespace ProductApi.Boundary
 
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public double Price { get; set; }
         public string Description { get; set; }
     }
 }

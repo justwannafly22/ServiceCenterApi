@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using System;
 
 namespace MasterApi.Boundary.Master.RequestModels
 {
@@ -8,5 +9,6 @@ namespace MasterApi.Boundary.Master.RequestModels
         public string Surname { get; set; }
         public int Age { get; set; }
         public string ContactNumber { get; set; }
+        public Guid AttendeeId { get; set; }
     }
 }

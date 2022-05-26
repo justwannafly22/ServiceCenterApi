@@ -17,7 +17,6 @@ namespace ProductApi.Infrastructure.Extensions
             {
                 Id = model.Id,
                 Name = model.Name,
-                Price = model.Price,
                 Description = model.Description
             };
         }
@@ -33,7 +32,6 @@ namespace ProductApi.Infrastructure.Extensions
             {
                 Id = model.Id,
                 Name = model.Name,
-                Price = model.Price,
                 Description = model.Description
             };
         }

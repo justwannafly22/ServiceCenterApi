@@ -15,10 +15,6 @@ namespace ProductApi.Repository.Entities
         [MaxLength(60)]
         public string Name { get; set; }
 
-        [Column("price")]
-        [Range(0, double.MaxValue)]
-        public double Price { get; set; }
-
         [Column("product_description")]
         [Required]
         public string Description { get; set; }

@@ -97,7 +97,6 @@ namespace ProductApi.Repository
                               .ConfigureAwait(false);
 
             entity.Name = model.Name;
-            entity.Price = model.Price;
             entity.Description = model.Description;
 
             await _context.SaveChangesAsync().ConfigureAwait(false);
