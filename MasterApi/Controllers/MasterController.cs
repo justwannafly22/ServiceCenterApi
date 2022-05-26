@@ -73,7 +73,7 @@ namespace MasterApi.Controllers
         [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status500InternalServerError)]
-        [HttpGet("{id}")]
+        [HttpPost("{attendeeId}")]
         public async Task<IActionResult> GetByAttendeeId([FromRoute] GetMasterByAttendeeIdRequestModel model)
         {
             var client = await _mediator.Send(model).ConfigureAwait(false);
