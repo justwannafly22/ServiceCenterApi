@@ -11,5 +11,7 @@ namespace RepairApi.Repository.Interfaces
         Task<RepairDomainModel> UpdateAsync(RepairDomainModel model);
         Task DeleteAsync(RepairDomainModel model);
         Task<RepairDomainModel> CreateAsync(RepairDomainModel model);
+        Task<List<RepairDomainModel>> GetAllByMasterIdAsync(RepairDomainModel model);
+        Task<List<RepairDomainModel>> GetAllByClientIdAsync(RepairDomainModel model);
     }
 }

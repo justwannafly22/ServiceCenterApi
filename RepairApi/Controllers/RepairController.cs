@@ -39,6 +39,24 @@ namespace RepairApi.Controllers
         }
 
         /// <summary>
+        /// Returns a repair
+        /// </summary>
+        /// <param name="id"></param>
+        /// <response code="200">Success. Repair model was received successfully</response>
+        /// <response code="400">Bad request</response>
+        /// <response code="404">Repair with provided id cannot be found</response>
+        /// <response code="500">Internal Server Error</response>
+        [ProducesResponseType(typeof(RepairResponseModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status500InternalServerError)]
+        [HttpGet]
+        public async Task<IActionResult> GetAll([FromRoute] GetAllRepairsRequestModel model)
+        {
+            return Ok(await _mediator.Send(model).ConfigureAwait(false));
+        }
+
+        /// <summary>
         /// Create a repair
         /// </summary>
         /// <param name="model"></param>

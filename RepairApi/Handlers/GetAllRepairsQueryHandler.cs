@@ -2,6 +2,7 @@
 using MediatR;
 using RepairApi.Boundary.Repair;
 using RepairApi.Boundary.Repair.RequestModels;
+using RepairApi.Domain;
 using RepairApi.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,19 @@ namespace RepairApi.Handlers
                 throw new ArgumentNullException(nameof(request));
             }
 
-            var repairs = await _repository.GetAllAsync().ConfigureAwait(false);
+            List<RepairDomainModel> repairs;
+            if (request.MasterId != Guid.Empty)
+            {
+                repairs = await _repository.GetAllByMasterIdAsync(new RepairDomainModel() { MasterId = request.MasterId }).ConfigureAwait(false);
+            }
+            else if (request.ClientId != Guid.Empty)
+            {
+                repairs = await _repository.GetAllByClientIdAsync(new RepairDomainModel() { ClientId = request.ClientId }).ConfigureAwait(false);
+            }
+            else
+            {
+                repairs = await _repository.GetAllAsync().ConfigureAwait(false);
+            }
 
             return _mapper.Map<List<RepairResponseModel>>(repairs);
         }

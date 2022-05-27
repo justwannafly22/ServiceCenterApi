@@ -81,12 +81,52 @@ namespace RepairApi.Repository
             }
 
             var entity = await GetRepairByExpression(r => r.Id.Equals(model.Id))
+                              .Include(r => r.RepairInfo)
+                                .ThenInclude(r => r.Status)
                               .SingleOrDefaultAsync()
                               .ConfigureAwait(false);
 
             _logger.LogDebug($"The repair table was triggered.");
 
             return _factory.ToDomain(entity);
+        }
+        
+        public async Task<List<RepairDomainModel>> GetAllByClientIdAsync(RepairDomainModel model)
+        {
+            if (model is null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            var entities = await GetRepairByExpression(r => r.ClientId.Equals(model.ClientId))
+                              .Include(r => r.RepairInfo)
+                                .ThenInclude(r => r.Status)
+                              .Select(r => _factory.ToDomain(r))
+                              .ToListAsync()
+                              .ConfigureAwait(false);
+
+            _logger.LogDebug($"The repair table was triggered.");
+
+            return entities;
+        }
+        
+        public async Task<List<RepairDomainModel>> GetAllByMasterIdAsync(RepairDomainModel model)
+        {
+            if (model is null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            var entities = await GetRepairByExpression(r => r.MasterId.Equals(model.MasterId))
+                              .Include(r => r.RepairInfo)
+                                .ThenInclude(r => r.Status)
+                              .Select(r => _factory.ToDomain(r))
+                              .ToListAsync()
+                              .ConfigureAwait(false);
+
+            _logger.LogDebug($"The repair table was triggered.");
+
+            return entities;
         }
 
         public async Task<RepairDomainModel> UpdateAsync(RepairDomainModel model)
