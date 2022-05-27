@@ -73,5 +73,23 @@ namespace RepairApi.Controllers
 
             return CreatedAtAction(nameof(Get), new { id = addedRepair.Id }, addedRepair);
         }
+    
+        /// <summary>
+        /// Create a repair
+        /// </summary>
+        /// <param name="model"></param>
+        /// <response code="201">Success. Repair model was updated successfully</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="500">Internal Server Error</response>
+        [ProducesResponseType(typeof(RepairResponseModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status500InternalServerError)]
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] UpdateRepairRequestModel model)
+        {
+            var updatedRepair = await _mediator.Send(model).ConfigureAwait(false);
+
+            return Ok(updatedRepair);
+        }
     }
 }

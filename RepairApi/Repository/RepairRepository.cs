@@ -137,6 +137,8 @@ namespace RepairApi.Repository
             }
 
             var entity = await GetRepairByExpression(r => r.Id.Equals(model.Id))
+                              .Include(r => r.RepairInfo)
+                                .ThenInclude(r => r.Status)
                               .SingleOrDefaultAsync()
                               .ConfigureAwait(false);
 
