@@ -1,9 +1,6 @@
 ﻿using RepairApi.Domain;
 using RepairApi.Repository.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RepairApi.Factories
 {
@@ -22,7 +19,9 @@ namespace RepairApi.Factories
                 Name = model.Name,
                 Date = model.RepairInfo.Date,
                 AdvancedInfo = model.RepairInfo.AdvancedInfo,
-                Status = model.RepairInfo.Status.StatusInfo
+                Status = model.RepairInfo.Status.StatusInfo,
+                MasterId = model.MasterId,
+                ClientId = model.ClientId
             };
         }
 
@@ -45,7 +44,9 @@ namespace RepairApi.Factories
                     {
                         StatusInfo = model.Status
                     }
-                }
+                },
+                MasterId = model.MasterId,
+                ClientId = model.ClientId
             };
         }
     }

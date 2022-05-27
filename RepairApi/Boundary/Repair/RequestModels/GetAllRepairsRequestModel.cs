@@ -6,7 +6,7 @@ namespace RepairApi.Boundary.Repair.RequestModels
 {
     public class GetAllRepairsRequestModel : IRequest<List<RepairResponseModel>>
     {
-        public Guid? ClientId { get; set; }
-        public Guid? MasterId { get; set; }
+        public Guid ClientId { get; set; }
+        public Guid MasterId { get; set; }
     }
 }

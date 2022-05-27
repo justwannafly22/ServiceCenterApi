@@ -51,7 +51,7 @@ namespace RepairApi.Controllers
         [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status500InternalServerError)]
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromRoute] GetAllRepairsRequestModel model)
+        public async Task<IActionResult> GetAll([FromQuery] GetAllRepairsRequestModel model)
         {
             return Ok(await _mediator.Send(model).ConfigureAwait(false));
         }

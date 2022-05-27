@@ -9,7 +9,7 @@ namespace RepairApi.Domain
         public DateTime Date { get; set; }
         public string AdvancedInfo { get; set; }
         public string Status { get; set; }
-        public Guid? MasterId { get; set; }
-        public Guid? ClientId { get; set; }
+        public Guid MasterId { get; set; }
+        public Guid ClientId { get; set; }
     }
 }
