@@ -77,7 +77,7 @@ namespace ProductApi.Controllers
         {
             var products = await _mediator.Send(request).ConfigureAwait(false);
 
-            return CreatedAtAction(nameof(Get), products);
+            return Ok(products);
         }
         
         /// <summary>

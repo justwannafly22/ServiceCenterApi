@@ -13,5 +13,6 @@ namespace Database
         Task<RepairDomainModel> CreateAsync(RepairDomainModel model);
         Task<List<RepairDomainModel>> GetAllByMasterIdAsync(RepairDomainModel model);
         Task<List<RepairDomainModel>> GetAllByClientIdAsync(RepairDomainModel model);
+        Task<List<ProductDomainModel>> GetProductsByClientIdAsync(RepairDomainModel model);
     }
 }

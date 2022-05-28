@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Database;
+using Database.Domain;
 using Light.GuardClauses;
 using MediatR;
 using ProductApi.Boundary;
@@ -12,10 +13,10 @@ namespace ProductApi.Handlers
 {
     public class GetProductsByClientIdQueryHandler : IRequestHandler<GetProductsByClientIdRequestModel, List<ProductResponseModel>>
     {
-        private readonly IProductRepository _repository;
+        private readonly IRepairRepository _repository;
         private readonly IMapper _mapper;
 
-        public GetProductsByClientIdQueryHandler(IProductRepository repository, IMapper mapper)
+        public GetProductsByClientIdQueryHandler(IRepairRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -25,7 +26,7 @@ namespace ProductApi.Handlers
         {
             request.MustNotBeNull(nameof(request));
 
-            var domainProducts = await _repository.GetAllAsync().ConfigureAwait(false);
+            var domainProducts = await _repository.GetProductsByClientIdAsync(new RepairDomainModel() { ClientId = request.ClientId }).ConfigureAwait(false);
 
             return _mapper.Map<List<ProductResponseModel>>(domainProducts);
         }

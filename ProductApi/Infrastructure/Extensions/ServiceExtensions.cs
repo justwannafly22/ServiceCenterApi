@@ -1,4 +1,5 @@
 ﻿using Database;
+using Database.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +20,9 @@ namespace ProductApi.Infrastructure.Extensions
         public static void ConfigureRepositories(this IServiceCollection services)
         {
             services.AddScoped<IProductRepository, ProductRepository>();
+
+            services.AddScoped<IRepairRepository, RepairRepository>();
+            services.AddScoped<IRepairRepositoryFactory, RepairRepositoryFactory>();
         }
 
         public static void ConfigureJWT(this IServiceCollection services)
