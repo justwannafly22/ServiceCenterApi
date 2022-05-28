@@ -1,6 +1,6 @@
-﻿using MasterApi.Factories;
+﻿using Database;
+using Database.Infrastructure;
 using MasterApi.Infrastructure.Authorization;
-using MasterApi.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,7 +19,7 @@ namespace MasterApi.Infrastructure.Extensions
 
         public static void ConfigureFactories(this IServiceCollection services)
         {
-            services.AddScoped<IRepositoryFactory, RepositoryFactory>();
+            services.AddScoped<IRepairRepositoryFactory, RepairRepositoryFactory>();
         }
 
         public static void ConfigureRepositories(this IServiceCollection services)

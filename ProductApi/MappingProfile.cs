@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using Database.Domain;
 using ProductApi.Boundary;
 using ProductApi.Boundary.RequestModels;
-using ProductApi.Domain;
 
 namespace ProductApi
 {

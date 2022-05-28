@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using Database.Domain;
 using ReplacedPartApi.Boundary;
 using ReplacedPartApi.Boundary.ReplacedParts;
 using ReplacedPartApi.Boundary.ReplacedParts.RequestModels;
-using ReplacedPartApi.Domain;
 
 namespace ReplacedPartApi
 {

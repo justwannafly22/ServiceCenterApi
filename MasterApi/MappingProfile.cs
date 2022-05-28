@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using Database.Domain;
 using MasterApi.Boundary.Master;
 using MasterApi.Boundary.Master.RequestModels;
-using MasterApi.Domain;
 
 namespace MasterApi
 {

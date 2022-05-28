@@ -1,7 +1,7 @@
 ﻿using ClientApi.Factories;
 using ClientApi.Infrastructure.Authorization;
-using ClientApi.Repository;
-using ClientApi.Repository.Interfaces;
+using Database;
+using Database.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -13,7 +13,7 @@ namespace ClientApi.Infrastructure.Extensions
         public static void ConfigureFactories(this IServiceCollection services)
         {
             services.AddScoped<IDomainFactory, DomainFactory>();
-            services.AddScoped<IRepositoryFactory, RepositoryFactory>();
+            services.AddScoped<IClientRepositoryFactory, ClientRepositoryFactory>();
         }
 
         public static void ConfigureRepository(this IServiceCollection services)

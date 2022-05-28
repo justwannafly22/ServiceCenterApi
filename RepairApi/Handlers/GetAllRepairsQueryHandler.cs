@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
+using Database;
+using Database.Domain;
 using MediatR;
 using RepairApi.Boundary.Repair;
 using RepairApi.Boundary.Repair.RequestModels;
-using RepairApi.Domain;
-using RepairApi.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Threading;

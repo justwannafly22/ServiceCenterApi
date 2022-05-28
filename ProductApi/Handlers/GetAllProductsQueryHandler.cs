@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
+using Database;
 using Light.GuardClauses;
 using MediatR;
 using ProductApi.Boundary;
 using ProductApi.Boundary.RequestModels;
-using ProductApi.Repository.Interfaces;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

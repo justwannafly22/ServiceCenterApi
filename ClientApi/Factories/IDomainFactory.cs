@@ -1,7 +1,7 @@
 ﻿using ClientApi.Boundary.Client;
 using ClientApi.Boundary.Client.RequestModels;
 using ClientApi.Boundary.Client.ResponseModels;
-using ClientApi.Domain;
+using Database.Domain;
 
 namespace ClientApi.Factories
 {

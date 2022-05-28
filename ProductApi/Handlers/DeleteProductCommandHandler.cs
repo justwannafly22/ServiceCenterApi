@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
+using Database;
+using Database.Domain;
 using Light.GuardClauses;
 using MediatR;
 using ProductApi.Boundary.RequestModels;
-using ProductApi.Domain;
 using ProductApi.Infrastructure.Exceptions;
-using ProductApi.Repository.Interfaces;
 using System.Threading;
 using System.Threading.Tasks;
 

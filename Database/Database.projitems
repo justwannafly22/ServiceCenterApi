@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>070a1441-d953-446d-bac3-6ad8799199e9</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Database</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ClientDomainModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\MasterDomainModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ProductDomainModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\RepairDomainModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ReplacedPartDomainModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entity\Client.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entity\Master.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entity\Product.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entity\Repair.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entity\RepairInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entity\ReplacedPart.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entity\Status.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Infrastructure\Extensions\ProductFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Infrastructure\Extensions\ReplacedPartFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Infrastructure\Interfaces\IMasterRepositoryFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Infrastructure\Interfaces\IRepairRepositoryFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Infrastructure\Interfaces\IClientRepositoryFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Infrastructure\MasterRepositoryFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Infrastructure\RepairRepositoryFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Infrastructure\ClientRepositoryFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RepositoryDbContext.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repository\ClientRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repository\Interfaces\IClientRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repository\Interfaces\IMasterRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repository\Interfaces\IProductRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repository\Interfaces\IRepairRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repository\Interfaces\IReplacedPartRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repository\MasterRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repository\ProductRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repository\RepairRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repository\ReplacedPartRepository.cs" />
+  </ItemGroup>
+</Project>

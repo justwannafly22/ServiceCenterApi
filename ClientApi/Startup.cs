@@ -1,6 +1,6 @@
 using ClientApi.Infrastructure.Exceptions;
 using ClientApi.Infrastructure.Extensions;
-using ClientApi.Repository.Entities;
+using Database;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

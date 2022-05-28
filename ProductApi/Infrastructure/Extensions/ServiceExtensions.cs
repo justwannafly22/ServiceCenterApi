@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Database;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ProductApi.Infrastructure.Authorization;
-using ProductApi.Repository;
-using ProductApi.Repository.Entities;
-using ProductApi.Repository.Interfaces;
 using System;
 
 namespace ProductApi.Infrastructure.Extensions

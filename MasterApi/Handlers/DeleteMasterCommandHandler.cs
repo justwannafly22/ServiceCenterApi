@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using Database;
+using Database.Domain;
 using MasterApi.Boundary.Master.RequestModels;
-using MasterApi.Domain;
-using MasterApi.Repository;
 using MediatR;
 using System;
 using System.Threading;

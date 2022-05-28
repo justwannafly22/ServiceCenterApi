@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using Database.Domain;
 using RepairApi.Boundary.Repair;
 using RepairApi.Boundary.Repair.RequestModels;
-using RepairApi.Domain;
 
 namespace RepairApi
 {

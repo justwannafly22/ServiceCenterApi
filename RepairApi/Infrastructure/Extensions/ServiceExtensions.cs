@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Database;
+using Database.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RepairApi.Factories;
 using RepairApi.Infrastructure.Authorization;
-using RepairApi.Repository;
-using RepairApi.Repository.Entities;
-using RepairApi.Repository.Interfaces;
 using System;
 
 namespace RepairApi.Infrastructure.Extensions
@@ -21,7 +19,7 @@ namespace RepairApi.Infrastructure.Extensions
 
         public static void ConfigureFactories(this IServiceCollection services)
         {
-            services.AddScoped<IRepositoryFactory, RepositoryFactory>();
+            services.AddScoped<IRepairRepositoryFactory, RepairRepositoryFactory>();
         }
 
         public static void ConfigureRepositories(this IServiceCollection services)

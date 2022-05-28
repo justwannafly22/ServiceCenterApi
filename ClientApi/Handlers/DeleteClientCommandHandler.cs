@@ -1,6 +1,6 @@
 ﻿using ClientApi.Boundary.Client.RequestModels;
 using ClientApi.Factories;
-using ClientApi.Repository.Interfaces;
+using Database;
 using MediatR;
 using System;
 using System.Threading;

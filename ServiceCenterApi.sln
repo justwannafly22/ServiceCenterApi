@@ -13,9 +13,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReplacedPartApi", "Replaced
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MasterApi", "MasterApi\MasterApi.csproj", "{F9D8EF5D-A600-499D-9681-8F8D73CAB32D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityService", "IdentityService\IdentityService.csproj", "{74514144-AD84-4D7A-B7C2-C3D269D7B171}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityService", "IdentityService\IdentityService.csproj", "{74514144-AD84-4D7A-B7C2-C3D269D7B171}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Database", "Database\Database.shproj", "{070A1441-D953-446D-BAC3-6AD8799199E9}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Database\Database.projitems*{070a1441-d953-446d-bac3-6ad8799199e9}*SharedItemsImports = 13
+		Database\Database.projitems*{0e3a0713-9281-45a3-91d6-6fcc4978af03}*SharedItemsImports = 5
+		Database\Database.projitems*{74514144-ad84-4d7a-b7c2-c3d269d7b171}*SharedItemsImports = 5
+		Database\Database.projitems*{9756880b-2ce5-44e7-8c11-3cb787750d4f}*SharedItemsImports = 5
+		Database\Database.projitems*{ee8090f3-f0e9-4366-900c-4dd0c5898b75}*SharedItemsImports = 5
+		Database\Database.projitems*{f46ef6d9-23f4-432a-98a3-a8af85694d7f}*SharedItemsImports = 5
+		Database\Database.projitems*{f9d8ef5d-a600-499d-9681-8f8d73cab32d}*SharedItemsImports = 5
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
