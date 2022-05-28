@@ -65,7 +65,7 @@ namespace IdentityService
                 });
             });
 
-            services.AddDbContext<RepositoryDbContext>(opts =>
+            services.AddDbContext<IdentityDbContext>(opts =>
                 opts.UseSqlServer(Configuration.GetConnectionString("sqlConnection")));
         }
 

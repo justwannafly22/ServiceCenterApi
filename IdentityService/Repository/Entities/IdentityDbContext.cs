@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IdentityService.Repository.Entities
 {
-    public class RepositoryDbContext : IdentityDbContext<User>
+    public class IdentityDbContext : IdentityDbContext<User>
     {
-        public RepositoryDbContext(DbContextOptions<RepositoryDbContext> options)
+        public IdentityDbContext(DbContextOptions<IdentityDbContext> options)
             : base(options)
         {
         }

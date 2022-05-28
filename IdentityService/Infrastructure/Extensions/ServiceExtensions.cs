@@ -28,7 +28,7 @@ namespace IdentityService.Infrastructure.Extensions
             });
 
             builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), builder.Services);
-            builder.AddEntityFrameworkStores<RepositoryDbContext>().AddDefaultTokenProviders();
+            builder.AddEntityFrameworkStores<IdentityDbContext>().AddDefaultTokenProviders();
         }
 
         public static void ConfigureJWT(this IServiceCollection services)

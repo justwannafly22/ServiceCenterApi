@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IdentityService.Migrations
 {
-    [DbContext(typeof(RepositoryDbContext))]
+    [DbContext(typeof(IdentityDbContext))]
     [Migration("20220522184054_Initial")]
     partial class Initial
     {
