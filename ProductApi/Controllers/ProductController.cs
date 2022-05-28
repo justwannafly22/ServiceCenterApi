@@ -66,6 +66,24 @@ namespace ProductApi.Controllers
         /// Create a product
         /// </summary>
         /// <param name="model"></param>
+        /// <response code="200">Success. Products received successfully</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="500">Internal Server Error</response>
+        [ProducesResponseType(typeof(ProductResponseModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status500InternalServerError)]
+        [HttpPost("{clientId}")]
+        public async Task<IActionResult> GetProductsByClientId([FromRoute] GetProductsByClientIdRequestModel request)
+        {
+            var products = await _mediator.Send(request).ConfigureAwait(false);
+
+            return CreatedAtAction(nameof(Get), products);
+        }
+        
+        /// <summary>
+        /// Create a product
+        /// </summary>
+        /// <param name="model"></param>
         /// <response code="201">Success. Product model was created successfully</response>
         /// <response code="400">Bad Request</response>
         /// <response code="500">Internal Server Error</response>

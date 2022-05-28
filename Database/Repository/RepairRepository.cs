@@ -34,7 +34,7 @@ namespace Database
             await _context.AddAsync(entity).ConfigureAwait(false);
             await _context.SaveChangesAsync().ConfigureAwait(false);
 
-            _logger.LogDebug($"The repair: {entity} was successfully created.");
+            _logger.LogInformation($"The repair: {entity} was successfully created.");
 
             return _factory.ToDomain(entity);
         }
@@ -52,7 +52,7 @@ namespace Database
 
             _context.Remove(entity);
 
-            _logger.LogDebug($"The repair: {entity} was successfully deleted.");
+            _logger.LogInformation($"The repair: {entity} was successfully deleted.");
 
             await _context.SaveChangesAsync().ConfigureAwait(false);
         }
@@ -66,7 +66,7 @@ namespace Database
                                 .ToListAsync()
                                 .ConfigureAwait(false);
 
-            _logger.LogDebug($"The repair table was triggered.");
+            _logger.LogInformation($"The repair table was triggered.");
 
             return entities;
         }
@@ -84,7 +84,7 @@ namespace Database
                               .SingleOrDefaultAsync()
                               .ConfigureAwait(false);
 
-            _logger.LogDebug($"The repair table was triggered.");
+            _logger.LogInformation($"The repair table was triggered.");
 
             return _factory.ToDomain(entity);
         }
@@ -107,6 +107,30 @@ namespace Database
 
             return entities;
         }
+        
+        public async Task<List<ProductDomainModel>> GetProductsByClientIdAsync(RepairDomainModel model)
+        {
+            if (model is null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            var ids = await _context.Set<Repair>()
+                              .Where(r => r.ClientId.Equals(model.ClientId))
+                              .Select(r => r.ProductId)
+                              .ToListAsync()
+                              .ConfigureAwait(false);
+
+            var products = await _context.Set<Product>()
+                              .Where(p => ids.Contains(p.Id))
+                              .Select(p => p.ToDomain())
+                              .ToListAsync()
+                              .ConfigureAwait(false);
+
+            _logger.LogInformation($"Products received successfully.");
+
+            return products;
+        }
 
         public async Task<List<RepairDomainModel>> GetAllByMasterIdAsync(RepairDomainModel model)
         {
@@ -122,7 +146,7 @@ namespace Database
                               .ToListAsync()
                               .ConfigureAwait(false);
 
-            _logger.LogDebug($"The repair table was triggered.");
+            _logger.LogInformation($"The repair table was triggered.");
 
             return entities;
         }
@@ -147,7 +171,7 @@ namespace Database
 
             await _context.SaveChangesAsync().ConfigureAwait(false);
 
-            _logger.LogDebug($"The repair: {entity} was successfully updated.");
+            _logger.LogInformation($"The repair: {entity} was successfully updated.");
 
             return _factory.ToDomain(entity);
         }

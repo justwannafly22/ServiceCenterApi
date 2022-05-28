@@ -11,5 +11,6 @@ namespace RepairApi.Boundary.Repair
         public string Status { get; set; }
         public Guid MasterId { get; set; }
         public Guid ClientId { get; set; }
+        public Guid ProductId { get; set; }
     }
 }

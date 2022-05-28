@@ -20,7 +20,8 @@ namespace Database.Infrastructure
                 AdvancedInfo = model.RepairInfo.AdvancedInfo,
                 Status = model.RepairInfo.Status.StatusInfo,
                 MasterId = model.MasterId,
-                ClientId = model.ClientId
+                ClientId = model.ClientId,
+                ProductId = model.ProductId
             };
         }
 
@@ -45,7 +46,8 @@ namespace Database.Infrastructure
                     }
                 },
                 MasterId = model.MasterId,
-                ClientId = model.ClientId
+                ClientId = model.ClientId,
+                ProductId = model.ProductId
             };
         }
     }
