@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using ReplacedPartApi.Boundary.ReplacedParts.RequestModels;
-using System;
 
 namespace ReplacedPartApi.Infrastructure.Validators.ReplacedPart
 {
@@ -25,12 +24,6 @@ namespace ReplacedPartApi.Infrastructure.Validators.ReplacedPart
             RuleFor(r => r.AdvancedInfo)
                 .NotEmpty().WithMessage("{PropertyName} is a required field.")
                 .Length(0, 500).WithMessage("Max length for {PropertyName} is 60 characters.");
-
-            RuleFor(r => r.RepairId)
-                .NotEqual(new Guid());
-            
-            RuleFor(r => r.ProductId)
-                .NotEqual(new Guid());
         }
     }
 }
