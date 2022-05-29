@@ -97,6 +97,7 @@ namespace Database
             entity.Name = model.Name;
             entity.Description = model.Description;
 
+            _context.Update(entity);
             await _context.SaveChangesAsync().ConfigureAwait(false);
 
             _logger.LogInformation($"The product with id: {model.Id} was successfully updated.");

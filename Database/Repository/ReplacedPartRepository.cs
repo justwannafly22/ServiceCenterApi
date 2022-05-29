@@ -110,6 +110,7 @@ namespace Database
             entity.Count = model.Count;
             entity.AdvancedInfo = model.AdvancedInfo;
 
+            _context.Update(entity);
             await _context.SaveChangesAsync().ConfigureAwait(false);
 
             _logger.LogInformation($"The replaced part was successfully updated.");

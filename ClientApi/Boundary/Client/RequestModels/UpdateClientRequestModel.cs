@@ -24,7 +24,5 @@ namespace ClientApi.Boundary.Client.RequestModels
         [Required(ErrorMessage = "Email is a required field.")]
         [MaxLength(60, ErrorMessage = "Max length for Email is 60 characters.")]
         public string Email { get; set; }
-
-        public Guid AttendeeId { get; set; }
     }
 }

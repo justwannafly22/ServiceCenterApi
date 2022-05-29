@@ -58,8 +58,7 @@ namespace ClientApi.Factories
                 Surname = model.Surname,
                 Age = model.Age,
                 ContactNumber = model.ContactNumber,
-                Email = model.Email,
-                AttendeeId = model.AttendeeId
+                Email = model.Email
             };
         }
 

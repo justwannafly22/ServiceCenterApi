@@ -118,6 +118,7 @@ namespace Database
             entity.Email = model.Email;
             entity.AttendeeId = model.AttendeeId;
 
+            _context.Update(entity);
             await _context.SaveChangesAsync().ConfigureAwait(false);
 
             _logger.LogInformation($"The master: {entity} was successfully updated.");

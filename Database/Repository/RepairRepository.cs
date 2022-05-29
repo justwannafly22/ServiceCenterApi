@@ -169,6 +169,7 @@ namespace Database
             entity.RepairInfo.AdvancedInfo = model.AdvancedInfo;
             entity.RepairInfo.Status.StatusInfo = model.Status;
 
+            _context.Update(entity);
             await _context.SaveChangesAsync().ConfigureAwait(false);
 
             _logger.LogInformation($"The repair: {entity} was successfully updated.");
