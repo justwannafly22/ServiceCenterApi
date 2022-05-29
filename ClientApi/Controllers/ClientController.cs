@@ -132,9 +132,9 @@ namespace ClientApi.Controllers
             }
 
             var model = new UpdateClientModel(requestModel, id);
-            _ = await _mediator.Send(model).ConfigureAwait(false);
+            var response = await _mediator.Send(model).ConfigureAwait(false);
 
-            return NoContent();
+            return Ok(response);
         }
 
         /// <summary>
