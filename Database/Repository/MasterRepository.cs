@@ -116,7 +116,6 @@ namespace Database
             entity.Age = model.Age;
             entity.ContactNumber = model.ContactNumber;
             entity.Email = model.Email;
-            entity.AttendeeId = model.AttendeeId;
 
             _context.Update(entity);
             await _context.SaveChangesAsync().ConfigureAwait(false);

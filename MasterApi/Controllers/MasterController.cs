@@ -131,9 +131,9 @@ namespace MasterApi.Controllers
             }
 
             var model = new UpdateMasterModel(requestModel, id);
-            _ = await _mediator.Send(model).ConfigureAwait(false);
+            var updatedMaster = await _mediator.Send(model).ConfigureAwait(false);
 
-            return NoContent();
+            return Ok(updatedMaster);
         }
 
         /// <summary>

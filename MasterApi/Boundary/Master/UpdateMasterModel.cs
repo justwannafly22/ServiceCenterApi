@@ -12,6 +12,7 @@ namespace MasterApi.Boundary.Master
             Surname = model.Surname;
             Age = model.Age;
             ContactNumber = model.ContactNumber;
+            Email = model.Email;
         }
 
         public UpdateMasterModel(UpdateMasterRequestModel model, Guid id)
@@ -21,6 +22,7 @@ namespace MasterApi.Boundary.Master
             Surname = model.Surname;
             Age = model.Age;
             ContactNumber = model.ContactNumber;
+            Email = model.Email;
         }
 
         public UpdateMasterModel() { }
@@ -29,5 +31,6 @@ namespace MasterApi.Boundary.Master
         public string Surname { get; set; }
         public int Age { get; set; }
         public string ContactNumber { get; set; }
+        public string Email { get; set; }
     }
 }
