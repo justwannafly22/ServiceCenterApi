@@ -19,7 +19,7 @@ namespace MasterApi.Infrastructure.Extensions
 
         public static void ConfigureFactories(this IServiceCollection services)
         {
-            services.AddScoped<IRepairRepositoryFactory, RepairRepositoryFactory>();
+            services.AddScoped<IMasterRepositoryFactory, MasterRepositoryFactory>();
         }
 
         public static void ConfigureRepositories(this IServiceCollection services)
