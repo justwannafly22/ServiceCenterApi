@@ -29,7 +29,7 @@ namespace MasterApi.Handlers
             }
 
             var model = _mapper.Map<MasterDomainModel>(request);
-            var master = await _repository.GetByIdAsync(model).ConfigureAwait(false);
+            var master = await _repository.GetByAttendeeIdAsync(model).ConfigureAwait(false);
 
             return _mapper.Map<MasterResponseModel>(master);
         }
