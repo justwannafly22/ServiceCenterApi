@@ -34,9 +34,13 @@ namespace ReplacedPartApi.Handlers.ReplacedPart
             {
                 replacedParts = await _repository.GetAllByProductIdAsync(request.Id).ConfigureAwait(false);
             }
-            else
+            else if (request.RequiredIdType is RequiredIdType.RepairId)
             {
                 replacedParts = await _repository.GetAllByRepairIdAsync(request.Id).ConfigureAwait(false);
+            }
+            else
+            {
+                replacedParts = await _repository.GetAllAsync().ConfigureAwait(false);
             }
 
             return _mapper.Map<List<ReplacedPartResponseModel>>(replacedParts);

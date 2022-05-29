@@ -30,8 +30,8 @@ namespace ReplacedPartApi.Controllers
         /// <response code="500">Internal Server Error</response>
         [ProducesResponseType(typeof(List<ReplacedPartResponseModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status500InternalServerError)]
-        [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] Guid requiredId, [FromQuery] RequiredIdType type)
+        [HttpGet("type/{type}")]
+        public async Task<IActionResult> GetAll([FromRoute] RequiredIdType type, [FromQuery] Guid requiredId)
         {
             var request = new GetAllReplacedPartRequestModel(requiredId, type);
 

@@ -13,5 +13,6 @@ namespace Database
         Task DeleteAsync(ReplacedPartDomainModel model);
         Task<List<ReplacedPartDomainModel>> GetAllByRepairIdAsync(Guid repairId);
         Task<List<ReplacedPartDomainModel>> GetAllByProductIdAsync(Guid productId);
+        Task<List<ReplacedPartDomainModel>> GetAllAsync();
     }
 }

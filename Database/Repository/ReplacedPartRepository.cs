@@ -77,6 +77,18 @@ namespace Database
 
             return entities;
         }
+        
+        public async Task<List<ReplacedPartDomainModel>> GetAllAsync()
+        {
+            var entities = await GetAll()
+                                .Select(r => r.ToDomain())
+                                .ToListAsync()
+                                .ConfigureAwait(false);
+
+            _logger.LogInformation($"The ReplacedPart table was triggered");
+
+            return entities;
+        }
 
         public async Task<ReplacedPartDomainModel> GetByIdAsync(ReplacedPartDomainModel model)
         {
