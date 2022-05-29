@@ -45,7 +45,7 @@ namespace Database
                 throw new ArgumentNullException(nameof(model));
             }
 
-            var entity = await GetRepairByExpression(r => r.Id.Equals(model.Id))
+            var entity = await GetMasterByExpression(r => r.Id.Equals(model.Id))
                               .SingleOrDefaultAsync()
                               .ConfigureAwait(false);
 
@@ -58,7 +58,7 @@ namespace Database
 
         public async Task<List<MasterDomainModel>> GetAllAsync()
         {
-            var entities = await GetAllRepairs()
+            var entities = await GetAllMasters()
                                 .Select(r => _factory.ToDomain(r))
                                 .ToListAsync()
                                 .ConfigureAwait(false);
@@ -75,7 +75,7 @@ namespace Database
                 throw new ArgumentNullException(nameof(model));
             }
 
-            var entity = await GetRepairByExpression(r => r.Id.Equals(model.Id))
+            var entity = await GetMasterByExpression(r => r.Id.Equals(model.Id))
                               .SingleOrDefaultAsync()
                               .ConfigureAwait(false);
 
@@ -91,7 +91,7 @@ namespace Database
                 throw new ArgumentNullException(nameof(model));
             }
 
-            var entity = await GetRepairByExpression(r => r.AttendeeId.Equals(model.AttendeeId))
+            var entity = await GetMasterByExpression(r => r.AttendeeId.Equals(model.AttendeeId))
                               .SingleOrDefaultAsync()
                               .ConfigureAwait(false);
 
@@ -107,7 +107,7 @@ namespace Database
                 throw new ArgumentNullException(nameof(model));
             }
 
-            var entity = await GetRepairByExpression(r => r.Id.Equals(model.Id))
+            var entity = await GetMasterByExpression(r => r.Id.Equals(model.Id))
                               .SingleOrDefaultAsync()
                               .ConfigureAwait(false);
 
@@ -125,10 +125,10 @@ namespace Database
             return _factory.ToDomain(entity);
         }
 
-        private IQueryable<Master> GetAllRepairs() =>
+        private IQueryable<Master> GetAllMasters() =>
             _context.Set<Master>();
 
-        private IQueryable<Master> GetRepairByExpression(Expression<Func<Master, bool>> expression) =>
+        private IQueryable<Master> GetMasterByExpression(Expression<Func<Master, bool>> expression) =>
             _context.Set<Master>()
                     .Where(expression);
     }
