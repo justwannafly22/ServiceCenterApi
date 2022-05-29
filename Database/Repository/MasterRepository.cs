@@ -75,7 +75,7 @@ namespace Database
                 throw new ArgumentNullException(nameof(model));
             }
 
-            var entity = await GetRepairByExpression(r => r.Id.Equals(model.Id))
+            var entity = await GetRepairByExpression(r => r.AttendeeId.Equals(model.AttendeeId))
                               .SingleOrDefaultAsync()
                               .ConfigureAwait(false);
 
