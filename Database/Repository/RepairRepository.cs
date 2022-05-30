@@ -66,6 +66,11 @@ namespace Database
                                 .ToListAsync()
                                 .ConfigureAwait(false);
 
+            foreach (var e in entities)
+            {
+                e.Date = e.Date.ToUniversalTime();
+            }
+
             _logger.LogInformation($"The repair table was triggered.");
 
             return entities;
@@ -84,9 +89,12 @@ namespace Database
                               .SingleOrDefaultAsync()
                               .ConfigureAwait(false);
 
+            var updated = _factory.ToDomain(entity);
+            updated.Date = updated.Date.ToUniversalTime();
+
             _logger.LogInformation($"The repair table was triggered.");
 
-            return _factory.ToDomain(entity);
+            return updated;
         }
         
         public async Task<List<RepairDomainModel>> GetAllByClientIdAsync(RepairDomainModel model)
