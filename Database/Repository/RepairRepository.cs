@@ -167,6 +167,9 @@ namespace Database
             entity.Name = model.Name;
             entity.RepairInfo.Date = model.Date;
             entity.RepairInfo.AdvancedInfo = model.AdvancedInfo;
+            entity.MasterId = model.MasterId;
+            entity.RepairInfo.AdvancedInfo = model.AdvancedInfo;
+            entity.RepairInfo.AdvancedInfo = model.AdvancedInfo;
             entity.RepairInfo.Status.StatusInfo = model.Status;
 
             _context.Update(entity);
