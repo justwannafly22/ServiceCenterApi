@@ -19,6 +19,7 @@ namespace ClientApi.Infrastructure.Extensions
         public static void ConfigureRepository(this IServiceCollection services)
         {
             services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
         }
         
         public static void ConfigureJWT(this IServiceCollection services)
