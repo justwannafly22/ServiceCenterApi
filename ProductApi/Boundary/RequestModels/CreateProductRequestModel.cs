@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using System;
 
 namespace ProductApi.Boundary.RequestModels
 {
@@ -6,5 +7,6 @@ namespace ProductApi.Boundary.RequestModels
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        public Guid ClientId { get; set; }
     }
 }

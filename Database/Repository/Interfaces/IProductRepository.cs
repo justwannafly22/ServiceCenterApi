@@ -1,4 +1,5 @@
 ﻿using Database.Domain;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,5 +12,6 @@ namespace Database
         Task<ProductDomainModel> CreateAsync(ProductDomainModel model);
         Task<ProductDomainModel> UpdateAsync(ProductDomainModel model);
         Task DeleteAsync(ProductDomainModel model);
+        Task<ProductDomainModel> GetAllByClientIdAsync(Guid id);
     }
 }

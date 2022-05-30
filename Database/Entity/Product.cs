@@ -18,5 +18,7 @@ namespace Database
         [Column("product_description")]
         [Required]
         public string Description { get; set; }
+
+        public Guid ClientId { get; set; }
     }
 }

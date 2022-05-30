@@ -2,6 +2,7 @@
 using ClientApi.Boundary.Client;
 using ClientApi.Boundary.Client.RequestModels;
 using ClientApi.Boundary.Client.ResponseModels;
+using Database;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,10 +19,12 @@ namespace ClientApi.Controllers
     public class ClientController : BaseController
     {
         private readonly IMediator _mediator;
+        private readonly IProductRepository _productRepository;
 
-        public ClientController(IMediator mediator)
+        public ClientController(IMediator mediator, IProductRepository productRepository)
         {
             _mediator = mediator;
+            _productRepository = productRepository;
         }
 
         /// <summary>
@@ -85,6 +88,24 @@ namespace ClientApi.Controllers
             }
 
             return Ok(client);
+        }
+
+        /// <summary>
+        /// Create a client
+        /// </summary>
+        /// <param name="model"></param>
+        /// <response code="201">Success. Client was created successfully</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="500">Internal Server Error</response>
+        [ProducesResponseType(typeof(ClientResponseModel), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status500InternalServerError)]
+        [HttpPost("{id}")]
+        public async Task<IActionResult> GetProductsByClientId([FromRoute] Guid id)
+        {
+            var products = await _productRepository.GetAllByClientIdAsync(id).ConfigureAwait(false);
+
+            return Ok(products);
         }
 
         /// <summary>

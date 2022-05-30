@@ -16,7 +16,8 @@ namespace Database.Infrastructure
             {
                 Id = model.Id,
                 Name = model.Name,
-                Description = model.Description
+                Description = model.Description,
+                ClientId = model.ClientId
             };
         }
 
@@ -31,7 +32,8 @@ namespace Database.Infrastructure
             {
                 Id = model.Id,
                 Name = model.Name,
-                Description = model.Description
+                Description = model.Description,
+                ClientId = model.ClientId
             };
         }
     }
