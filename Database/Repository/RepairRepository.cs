@@ -111,6 +111,11 @@ namespace Database
                               .ToListAsync()
                               .ConfigureAwait(false);
 
+            foreach (var e in entities)
+            {
+                e.Date = e.Date.ToUniversalTime();
+            }
+
             _logger.LogDebug($"The repair table was triggered.");
 
             return entities;
@@ -153,6 +158,11 @@ namespace Database
                               .Select(r => _factory.ToDomain(r))
                               .ToListAsync()
                               .ConfigureAwait(false);
+
+            foreach (var e in entities)
+            {
+                e.Date = e.Date.ToUniversalTime();
+            }
 
             _logger.LogInformation($"The repair table was triggered.");
 
