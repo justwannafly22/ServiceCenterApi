@@ -100,10 +100,10 @@ namespace ClientApi.Controllers
         [ProducesResponseType(typeof(ClientResponseModel), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(BaseResponseModel), StatusCodes.Status500InternalServerError)]
-        [HttpPost("products/{id}")]
-        public async Task<IActionResult> GetProductsByClientId([FromRoute] Guid id)
+        [HttpPost("get-products/{clientId}")]
+        public async Task<IActionResult> GetProductsByClientId([FromRoute] Guid clientId)
         {
-            var products = await _productRepository.GetAllByClientIdAsync(id).ConfigureAwait(false);
+            var products = await _productRepository.GetAllByClientIdAsync(clientId).ConfigureAwait(false);
 
             return Ok(products);
         }

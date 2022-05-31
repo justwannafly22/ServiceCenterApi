@@ -83,15 +83,16 @@ namespace Database
             return entity?.ToDomain();
         }
         
-        public async Task<ProductDomainModel> GetAllByClientIdAsync(Guid id)
+        public async Task<List<ProductDomainModel>> GetAllByClientIdAsync(Guid clientId)
         {
-            var entity = await GetByExpression(p => p.Id.Equals(id))
-                              .SingleOrDefaultAsync()
+            var entities = await GetByExpression(p => p.ClientId.Equals(clientId))
+                              .Select(p => p.ToDomain())
+                              .ToListAsync()
                               .ConfigureAwait(false);
 
             _logger.LogInformation($"The Product table was triggered");
 
-            return entity?.ToDomain();
+            return entities;
         }
 
         public async Task<ProductDomainModel> UpdateAsync(ProductDomainModel model)

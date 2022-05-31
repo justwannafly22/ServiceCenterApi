@@ -12,6 +12,6 @@ namespace Database
         Task<ProductDomainModel> CreateAsync(ProductDomainModel model);
         Task<ProductDomainModel> UpdateAsync(ProductDomainModel model);
         Task DeleteAsync(ProductDomainModel model);
-        Task<ProductDomainModel> GetAllByClientIdAsync(Guid id);
+        Task<List<ProductDomainModel>> GetAllByClientIdAsync(Guid clientId);
     }
 }
